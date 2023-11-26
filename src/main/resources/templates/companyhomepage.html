@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Home Page</title>
+    <link rel="stylesheet" href="../css/companyhome.css">
+    <script src="../js/companypage.js" defer></script>
+</head>
+<body>
+    <nav>
+        <form>
+            <label for="search"></label>
+            <input type="search" id="search-input" name="search" placeholder="Enter your search">
+            <button type="submit">Search</button>
+        </form>
+        <a href="About Us" class="about-us">About Us</a>
+        <a href="companycalendar.html" class="calendar">Calendar</a>
+        <a href="/login" onclick="logOut()" class="log-out">Log Out</a>
+    </nav>
+
+    <main>
+        <h1 th:text="${email} ? 'Hello ' + ${email} : 'Hello (No Email)'">Hello, email</h1>
+        <section class="about-us">
+            <div class="about-us-div">
+                <h1 class="about-us-text">About Us</h1>
+                <img src="../images/8666681_edit_icon.svg" alt="Edit icon" width="24" height="24" class="about-us-image" onclick="editAboutUs()">
+            </div>
+            <div id="about-us-p" class="div-text-p">
+                <p id="aboutUsEdit" contenteditable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius tempus convallis. Etiam vel mollis augue. Donec sed elementum nibh. Morbi tempor, enim vel iaculis ornare, justo est euismod arcu, a consectetur diam neque eget quam. Vestibulum quis ex non eros egestas vestibulum. Fusce ultricies auctor metus vitae ullamcorper. Nam ac tortor eu sapien congue facilisis sit amet ac tortor. Vivamus sagittis eget justo eu lobortis. Etiam lacinia ex nec ante bibendum, at ultrices est imperdiet. Nullam interdum pulvinar odio, vitae porttitor tellus rhoncus vel.</p>
+            </div>
+            <button id="about-us-save-button" style="display: none;" onclick="aboutUsSave()">Save</button>
+        </section>
+        <section class="location">
+            <div class="location-div">
+                <h1 class="location-text">Location</h1>
+                <img src="../images/8666681_edit_icon.svg" alt="Edit icon" width="24" height="24" class="location-image"onclick="editLocation()">
+            </div>
+            <p>Address :</p>
+            <p>City :</p>
+            <button id="location-save-button" style="display: none;">Save</button>
+        </section>
+        <section class="tags">
+            <div class="tags-div">
+                <h1 class="tags-text">Tags</h1>
+                <img src="../images/8666681_edit_icon.svg" alt="Edit icon" width="24" height="24" class="tags-image"onclick="editTags()">
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius tempus convallis. Etiam vel mollis augue. Donec sed elementum nibh. Morbi tempor, enim vel iaculis ornare, justo est euismod arcu, a consectetur diam neque eget quam. Vestibulum quis ex non eros egestas vestibulum. Fusce ultricies auctor metus vitae ullamcorper. Nam ac tortor eu sapien congue facilisis sit amet ac tortor. Vivamus sagittis eget justo eu lobortis. Etiam lacinia ex nec ante bibendum, at ultrices est imperdiet. Nullam interdum pulvinar odio, vitae porttitor tellus rhoncus vel.</p>
+            <button id="tags-save-button" style="display: none;">Save</button>
+        </section>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+body {
+    background-color: #ced7cf;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #439b46;
+    color: white;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    gap: 50px;
+    overflow: hidden;
+}
+
+nav form {
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+nav input[type="search"] {
+    padding: 5px;
+    width: 40vw;
+    padding: 10px;
+    /* width: 200px; */
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none; 
+}
+
+nav button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+main {
+    padding: 25px;
+}
+
+main section div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.about-us-image, .location-image, .tags-image{
+    display: none;
+}
+
+.about-us-div, .location-div, .tags-div{
+    cursor: pointer;
+}
+
+.tags-div:hover img{
+    display: block;
+}
+
+.about-us-div:hover img{
+    display: block;
+}
+
+.location-div:hover img {
+    display: block;
+}
+
+[contenteditable="true"]:focus {
+    outline: none; /* Remove the default outline */
+    border-color: #ccc; /* Set the border color when focused, if needed */
+}
+
+main button {
+    padding: 10px;
+    width: 70px;
+    border: none;
+    cursor: pointer;
+    background-color: #439b46;
+    color: rgb(15, 15, 15);
+    font-size: large;
+}
