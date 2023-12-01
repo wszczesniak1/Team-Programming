@@ -1,11 +1,11 @@
 CREATE SCHEMA IF NOT EXISTS `bookit`;
 USE `bookit`;
-
+#w
 CREATE TABLE IF NOT EXISTS users (
 	userID INT NOT NULL AUTO_INCREMENT,
-	first_name VARCHAR(255) NOT NULL,
-	last_name VARCHAR(255) NOT NULL,
-	email_address VARCHAR(255) NOT NULL,
+	firstName VARCHAR(255) NOT NULL,
+	lastName VARCHAR(255) NOT NULL,
+	emailAddress VARCHAR(255) NOT NULL,
 	phoneNumber VARCHAR(15),
 	PRIMARY KEY (userID)
 );
@@ -15,9 +15,10 @@ CREATE TABLE IF NOT EXISTS userPassword (
 	FOREIGN KEY (userID) REFERENCES users (userID)
 );
 
-
+#k
 CREATE TABLE IF NOT EXISTS company (
-	companyID INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+	companyID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+   	companyName VARCHAR(255) NOT NULL,
 	location VARCHAR(255) NOT NULL,
 	companyMail VARCHAR(255) UNIQUE, 
 	companyDescription TEXT, 
@@ -40,10 +41,10 @@ CREATE TABLE IF NOT EXISTS companyEmployee (
 	FOREIGN KEY (companyID) REFERENCES company(companyID), 
 	FOREIGN KEY (employeeID) REFERENCES employee(employeeID)
 );
-
+#w
 CREATE TABLE IF NOT EXISTS calendarEvents (
-	calendarEventsID INT NOT NULL ,
-	companyID INT NOT NULL AUTO_INCREMENT,
+	calendarEventsID INT NOT NULL AUTO_INCREMENT,
+	companyID INT NOT NULL,
 	eventName VARCHAR(255) NOT NULL,
 	eventDescription TEXT,
 	eventDateTime DATETIME NOT NULL,
@@ -66,6 +67,7 @@ CREATE TABLE IF NOT EXISTS userEvents (
 	FOREIGN KEY (calendarEventsID) REFERENCES calendarEvents (calendarEventsID)
 );
 
+#k
 CREATE TABLE IF NOT EXISTS tags (
 tagID INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
 tagName VARCHAR(255)
