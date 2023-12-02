@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
 	phoneNumber VARCHAR(15),
 	PRIMARY KEY (userID)
 );
-CREATE TABLE IF NOT EXISTS userPassword (
+CREATE TABLE IF NOT EXISTS userpassword (
 	userID INT NOT NULL,
 	passwordHash VARCHAR(255) NOT NULL,
 	FOREIGN KEY (userID) REFERENCES users (userID)
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS company (
 	companyDescription TEXT, 
 	phoneNumber VARCHAR(15)
 );
-CREATE TABLE IF NOT EXISTS companyPassword (
+CREATE TABLE IF NOT EXISTS companypassword (
 	companyID INT NOT NULL, 
 	passwordHash VARCHAR(255) NOT NULL, 
 	FOREIGN KEY (companyID) REFERENCES company(companyID)
@@ -33,33 +33,36 @@ CREATE TABLE IF NOT EXISTS employee (
 	employeeID INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
 	companyID INT NOT NULL, 
 	employeeFName VARCHAR(255) NOT NULL, 
-	employeeLName VARCHAR(255) NOT NULL
+	employeeLName VARCHAR(255) NOT NULL,
+	FOREIGN KEY (companyID) REFERENCES company(companyID)
 );
-CREATE TABLE IF NOT EXISTS companyEmployee (
-	companyID INT NOT NULL, 
-	employeeID INT NOT NULL, 
-	FOREIGN KEY (companyID) REFERENCES company(companyID), 
-	FOREIGN KEY (employeeID) REFERENCES employee(employeeID)
-);
+
 #w
-CREATE TABLE IF NOT EXISTS calendarEvents (
-	calendarEventsID INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS eventdetails (
+	eventdetailsID INT NOT NULL AUTO_INCREMENT,
 	companyID INT NOT NULL,
 	eventName VARCHAR(255) NOT NULL,
 	eventDescription TEXT,
-	eventDateTime DATETIME NOT NULL,
 	duration TIME,
 	price INT CHECK (price > 0 ),
-	PRIMARY KEY (calendarEventsID),
+	PRIMARY KEY (eventdetailsID),
 	FOREIGN KEY (companyID) REFERENCES company (companyID)
 );
-CREATE TABLE IF NOT EXISTS eventEmployee (
+CREATE TABLE IF NOT EXISTS calendarevents (
+	calendarEventsID INT NOT NULL AUTO_INCREMENT,
+	eventdetailsID INT NOT NULL,
+	eventDateTime DATETIME NOT NULL,
+	isAvailable BOOLEAN DEFAULT true,
+	PRIMARY KEY (calendarEventsID),
+	FOREIGN KEY (eventdetailsID) REFERENCES eventdetails (eventdetailsID)
+);
+CREATE TABLE IF NOT EXISTS eventemployee (
 	calendarEventsID INT NOT NULL,
 	employeeID INT NOT NULL,
 	FOREIGN KEY (calendarEventsID) REFERENCES calendarEvents (calendarEventsID),
 	FOREIGN KEY (employeeID) REFERENCES employee (employeeID)
 );
-CREATE TABLE IF NOT EXISTS userEvents (
+CREATE TABLE IF NOT EXISTS userevents (
 	userID INT NOT NULL,
 	calendarEventsID INT NOT NULL,
 	status ENUM ('ended', 'created', 'waiting', 'accepted', 'denied', 'canceled') NOT NULL DEFAULT 'created',
@@ -72,13 +75,13 @@ CREATE TABLE IF NOT EXISTS tags (
 tagID INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
 tagName VARCHAR(255)
 );
-CREATE TABLE IF NOT EXISTS companyTags (
+CREATE TABLE IF NOT EXISTS companytags (
 companyID INT NOT NULL, 
 tagID INT NOT NULL, 
 FOREIGN KEY (companyID) REFERENCES company(companyID), 
 FOREIGN KEY (tagID) REFERENCES tags(tagID)
 );
-CREATE TABLE IF NOT EXISTS toAccept (
+CREATE TABLE IF NOT EXISTS toaccept (
 companyID INT NOT NULL, 
 userID INT NOT NULL, 
 calendarEventsID INT NOT NULL, 
