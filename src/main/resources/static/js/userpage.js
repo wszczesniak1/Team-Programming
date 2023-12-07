@@ -1,32 +1,17 @@
-function addTask() {
-    var taskInput = document.getElementById("taskInput").value.trim();
-    var dateInput = document.getElementById("dateInput").value;
-    var timeInput = document.getElementById("timeInput").value;
-    var locationInput = document.getElementById("locationInput").value.trim();
+var searchBar = document.getElementById('searchBar');
+var cityTags = document.getElementById('cityTagsSearch');
+var sectionElement = document.getElementById('mainSearchSection');
+var wrapperElement = document.getElementById('toBlur');
 
-    if (taskInput !== "") {
-        var taskContainer = document.getElementById("taskContainer");
-        var taskElement = document.createElement("div");
-        taskElement.classList.add("task");
+document.getElementById('searchBar').addEventListener('click', function () {
+    cityTags.style = "visibility: true";
+    document.getElementById('cancleSearch').style = "display:block"
+    sectionElement.classList.add('shifted');
+});
 
-        var taskContent = `<strong>${taskInput}</strong>`;
-        if (dateInput) {
-            taskContent += `<br>Date: ${dateInput}`;
-        }
-        if (timeInput) {
-            taskContent += `<br>Time: ${timeInput}`;
-        }
-        if (locationInput) {
-            taskContent += `<br>Location: ${locationInput}`;
-        }
-
-        taskElement.innerHTML = taskContent;
-
-        taskContainer.appendChild(taskElement);
-
-        document.getElementById("taskInput").value = "";
-        document.getElementById("dateInput").value = "";
-        document.getElementById("timeInput").value = "";
-        document.getElementById("locationInput").value = "";
-    }
+function cancleSearch() {
+    cityTags.style = "visibility: hidden";
+    document.getElementById('cancleSearch').style = "display:none"
+    document.getElementById('searchInput').value = '';
+    sectionElement.classList.remove('shifted');
 }

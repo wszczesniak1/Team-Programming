@@ -4,62 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Home Page</title>
-    <link rel="stylesheet" href="../css/userhome.css">
-    <script src="../js/userpage.js" defer></script>
+    <link rel="stylesheet" href="../static/css/userhome.css">
+    <script src="../static/js/userpage.js" defer></script>
 </head>
 <body>
     <nav>
-        <form>
-            <label for="search"></label>
-            <input type="search" id="search-input" name="search" placeholder="Enter your search">
-            <button type="submit">Search</button>
-        </form>
-        <h1 th:text="${email} ? 'Hello ' + ${email} : 'Hello (No Email)'">Hello, email</h1>
+        <h2 th:text="${email} ? 'Hello ' + ${email} : 'Hello (No Email)'">Hello, email</h2>
+        <a href="/login" onclick="logOut()" class="log-out">Log Out</a>
     </nav>
 
-    <main>
-        <div class="somecontent">
-            <h2>Welcome to your user home page!</h2>
-            <p>This is where you can find information and perform actions related to your account.</p>
-            <form>
-                <label for="calendar">Select a date:</label>
-                <input type="date" id="calendar" name="calendar">
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-        <div class="somecontent2">
-            <h2>Your future appointments</h2>
-            <div class="task-container" id="taskContainer">
 
+    <main id="toBlur" class="wrapper">
+        <section class="main-search-section" id="mainSearchSection">
+            <div class="search-row">
+                <div class="search-bar" id="searchBar">
+                    <input type="text" id="searchInput" class="search-input" placeholder="What are you looking for...">
+                </div>
+                <button class="cancel-search" id="cancleSearch" onclick="cancleSearch()" style="display: none;">X</button>
             </div>
-            
-            <div class="idk">
+            <div class="city-tags-search" id="cityTagsSearch" style="visibility: hidden;">
                 <div>
-                    <label for="taskInput">Task:</label>
-                    <input type="text" id="taskInput" placeholder="Enter your task">
+                    <p>choose city</p>
                 </div>
-            
-                <div>
-                    <label for="dateInput">Date:</label>
-                    <input type="date" id="dateInput">
-                </div>
-    
-                <div>
-                    <label for="timeInput">Time:</label>
-                    <input type="time" id="timeInput">
-                </div>
-            
-                <div>
-                    <label for="locationInput">Location:</label>
-                    <input type="text" id="locationInput" placeholder="Enter location">
-                </div>
-            
-                <button onclick="addTask()">Add Task</button>
+                <button class="search-button" id="searchButton">Search</button>
             </div>
-
-        </div>
-
+        </section>
     </main>
-
 </body>
 </html>

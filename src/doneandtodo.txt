@@ -1,0 +1,14 @@
+TODO:
+- employee list
+- send data from backend to frontend
+- add / delete from calendar
+- edit from calendar
+
+IN PROGRESS:
+- create calendar view
+- serach view
+
+DONE: 
+- editable "about us" section
+- editable "inforations"
+- editable "tags"
