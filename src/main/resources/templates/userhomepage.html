@@ -8,7 +8,7 @@
     <script src="../static/js/userpage.js" defer></script>
 </head>
 <body>
-    <nav>
+    <nav class="blure-it">
         <h2 th:text="${email} ? 'Hello ' + ${email} : 'Hello (No Email)'">Hello, email</h2>
         <a href="/login" onclick="logOut()" class="log-out">Log Out</a>
     </nav>
@@ -26,7 +26,16 @@
                 <div>
                     <p>choose city</p>
                 </div>
-                <button class="search-button" id="searchButton">Search</button>
+                <button class="search-button" id="searchButton" onclick="search()">Search</button>
+            </div>
+
+            <div class="search-result-container" id="searchResultContainer" style="visibility: hidden;">
+
+            </div>
+        </section>
+        <section class="future-appointments blure-it" id="futureAppointments">
+            <h2>Your future appointments :</h2>
+            <div class="appointments-container" id="appointmentsContainer">
             </div>
         </section>
     </main>

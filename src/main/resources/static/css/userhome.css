@@ -19,13 +19,34 @@ nav {
 }
 
 main {
-    min-height: 80vh;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+}
+.main-search-section {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    transform: translateY(0);
+    transition: transform 0.5s ease-in-out;
+    flex: 2;
+}
+
+.future-appointments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #a2a2a2;
+    flex: 1;
+}
+
+.appointments-container {
+    width: 90%;
+    padding-right: 30px;
 }
 
 .search-row {
+    padding-top: 40vh;
     width: 70vw;
     display: flex;
     align-items: center;
@@ -45,17 +66,8 @@ main {
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
-    padding-right: 30px;
 }
 
-.main-search-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transform: translateY(0);
-    transition: transform 0.5s ease-in-out;
-      
-}
 
 .wrapper {
     position: relative;
@@ -94,4 +106,30 @@ main {
 
 button {
     cursor: pointer;
+}
+
+#searchResultContainer {
+    /* max-height: 200px; */
+    height: 70vh;
+    padding: 10px;
+    overflow-y:scroll;
+    width: 53vw;
+    display: flex;
+    flex-direction: column;
+    /* min-height: 50px; Set a minimum height */
+}
+
+.result-item {
+    margin-bottom: 10px;
+    padding: 15px;
+    background-color: bisque;
+    width: 100%;
+}
+
+.appointment-item {
+    margin-bottom: 10px;
+    padding: 15px;
+    background-color: rgb(147, 107, 59);
+    width: 100%;
+    border-radius: 10px;
 }
