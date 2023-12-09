@@ -71,22 +71,77 @@ const appointData = [
 ]
 
 function getFutureAppointments() {
-    var appointmentsContainer = document.getElementById('appointmentsContainer');
+    // var appointmentsContainer = document.getElementById('appointmentsContainer');
 
-    appointData.forEach(item => {
-        const resultItem = document.createElement('div');
-        resultItem.classList.add('appointment-item');
-        resultItem.innerHTML = `
-            <strong>${item.name}</strong><br>
-            Location: ${item.Location}<br>
-            Date: ${item.date}<br>
-            Time: ${item.time}
-        `;
-        appointmentsContainer.appendChild(resultItem);
-    });
+    // appointData.forEach(item => {
+    //     const resultItem = document.createElement('div');
+    //     resultItem.classList.add('appointment-item');
+    //     resultItem.innerHTML = `
+    //         <strong>${item.name}</strong><br>
+    //         Location: ${item.Location}<br>
+    //         Date: ${item.date}<br>
+    //         Time: ${item.time}
+    //     `;
+    //     appointmentsContainer.appendChild(resultItem);
+    // });
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+
+    console.log(userId);
+    if (!userId) {
+        console.error('User ID not found in local storage.');
+    } else {
+        // Make a GET request to the server endpoint with the user ID
+        fetch(`/getUserAppo/${userId}`)
+            .then(response => {
+                // Check if the request was successful (status code 200-299)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+    
+                // Parse the response JSON
+                return response.json();
+            })
+            .then(itemList => {
+                var appointmentsContainer = document.getElementById('appointmentsContainer');
+                // Iterate through the itemList and create divs for each item
+                itemList.forEach(item => {
+                    // Create a div element for each item
+                    const itemDiv = document.createElement("div");
+                    itemDiv.classList.add('appointment-item');
+                    // Set the content of the div using item properties
+                    itemDiv.innerHTML = `
+                        <p>Company: ${item.companyName}</p>
+                        <p>Location: ${item.location}</p>
+                        <p>Date: ${item.date}</p>
+                        <p>Time: ${item.time}</p>
+                        <p>User ID: ${item.userId}</p>
+                    `;
+        
+                    // Append the div to the container
+                    appointmentsContainer.appendChild(itemDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+
+            
+    }
 }
 
+// function getUserId() {
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const userId = urlParams.get('userId');
+
+//     // Store user ID in local storage
+//     localStorage.setItem('userId', userId);
+//     console.log(userId);
+// }
+
 window.onload = function() {
-    // Your JavaScript function
+    // getUserId();
+
+
     getFutureAppointments();
 };
