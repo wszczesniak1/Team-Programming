@@ -34,15 +34,24 @@ main {
 
 .future-appointments {
     display: flex;
+    height: 80%;
     flex-direction: column;
     align-items: center;
     background-color: #a2a2a2;
     flex: 1;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-.appointments-container {
+#appointmentsContainer {
+    /* max-height: 200px; */
+    height: 70%;
+    padding: 10px;
+    overflow-y:scroll;
     width: 90%;
-    padding-right: 30px;
+    display: flex;
+    flex-direction: column;
+    /* min-height: 50px; Set a minimum height */
 }
 
 .search-row {
@@ -127,8 +136,8 @@ button {
 }
 
 .appointment-item {
-    margin-bottom: 10px;
-    padding: 15px;
+    margin-bottom: 5px;
+    padding: 5px;
     background-color: rgb(147, 107, 59);
     width: 100%;
     border-radius: 10px;

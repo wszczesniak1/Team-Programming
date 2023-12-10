@@ -38,30 +38,66 @@ const data = [
     { name: 'Item 9', Location: 'Value 5', phone: 'Value 6' },
 ];
 
+// function search() {
+//     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+//     console.log(searchTerm);
+
+//     // Clear previous results
+//     resultsContainer.innerHTML = '';
+//     // Filter data based on search term
+//     const filteredData = data.filter(item =>
+//         item.name.toLowerCase().includes(searchTerm) ||
+//         item.Location.toLowerCase().includes(searchTerm) ||
+//         item.phone.toLowerCase().includes(searchTerm)
+//     );
+
+//     // Display results
+//     filteredData.forEach(item => {
+//         const resultItem = document.createElement('div');
+//         resultItem.classList.add('result-item');
+//         resultItem.innerHTML = `
+//             <strong>${item.name}</strong><br>
+//             Location: ${item.Location}<br>
+//             Phone number: ${item.phone}
+//         `;
+//         resultsContainer.appendChild(resultItem);
+//     });
+// }
+
 function search() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    console.log(searchTerm);
+    // Get the search term from the input field
+    const searchTerm = document.getElementById("searchInput").value;
+    console.log("search term before fetch" + searchTerm);
+    // Make a GET request to the server with the search term
+    fetch(`/serachForCompanies?str=${searchTerm}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(results => {
 
-    // Clear previous results
-    resultsContainer.innerHTML = '';
-    // Filter data based on search term
-    const filteredData = data.filter(item =>
-        item.name.toLowerCase().includes(searchTerm) ||
-        item.Location.toLowerCase().includes(searchTerm) ||
-        item.phone.toLowerCase().includes(searchTerm)
-    );
+            results.forEach(item => {
+                const resultItem = document.createElement('div');
+                resultItem.classList.add('result-item');
+                resultItem.innerHTML = `
+                    <strong>${item.companyName}</strong><br>
+                    Location: ${item.location}<br>
+                    Tags: ${item.tags}<br>
+                    companyId: ${item.companyID}
+                `;
 
-    // Display results
-    filteredData.forEach(item => {
-        const resultItem = document.createElement('div');
-        resultItem.classList.add('result-item');
-        resultItem.innerHTML = `
-            <strong>${item.name}</strong><br>
-            Location: ${item.Location}<br>
-            Phone number: ${item.phone}
-        `;
-        resultsContainer.appendChild(resultItem);
-    });
+                resultItem.addEventListener("click", function(){
+                    // console.log("Company ID:", item.companyID);
+                    window.location.href = `/redirectUserToCompany/${item.companyID}`;
+                })
+                resultsContainer.appendChild(resultItem);
+            });
+        })
+        .catch(error => {
+            console.error('Search error:', error);
+        });
 }
 
 const appointData = [

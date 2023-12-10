@@ -54,6 +54,11 @@ public class BookItController {
         return "registerpage";
     }
 
+    @GetMapping("/redirectUserToCompany/{companyId}")
+    public String redirectUser(@PathVariable int companyId) {
+        return "redirect:/companyhome?companyId=" + companyId;
+    }
+
     @GetMapping("/userhome")
     public String userHomePage(Model model) {
         return "userhomepage";
@@ -104,5 +109,41 @@ public class BookItController {
         userItems.add(new UserAppointments("firma 3", "Chicago", "30-12-2023", "11:11", userId));
         userItems.add(new UserAppointments("firma 4", "New Britain", "11-10-2024", "12:13", userId));
         return ResponseEntity.ok(userItems);
+    }
+
+    public class CompanyForUser implements Serializable{
+        @JsonProperty("companyName")
+        private String companyName;
+    
+        @JsonProperty("location")
+        private String location;
+    
+        @JsonProperty("tags")
+        private List<String> tags;
+    
+        @JsonProperty("companyID")
+        private int companyID;
+    
+
+        public CompanyForUser(String companyName, String location, List<String> tags, int companyID) {
+            this.companyName = companyName;
+            this.location = location;
+            this.tags = tags;
+            this.companyID = companyID;
+        }
+    }
+
+    @GetMapping("/serachForCompanies")
+    public ResponseEntity <List<CompanyForUser>> searchForCompanies(@RequestParam String str) {
+        List<CompanyForUser> companyList = new ArrayList<>();
+        companyList.add(new CompanyForUser("company name 1", "new york 123W st.", List.of("tag1", "tag2"), 1));
+        companyList.add(new CompanyForUser("company name 2", "chicago 1W st.", List.of("tag3", "tag4"), 2));
+        companyList.add(new CompanyForUser("company name 3", "los angeles 1W st.", List.of("tag1", "tag2", "tag3"), 3));
+        companyList.add(new CompanyForUser("company name 4", "los santos 1W st.", List.of("tag1", "tag2"), 4));
+        companyList.add(new CompanyForUser("company name 5", "berlin 13 st.", List.of("tag1", "tag2"), 5));
+        companyList.add(new CompanyForUser("company name 6", "asdassdasd.", List.of("tag1", "tag2"), 6));
+        companyList.add(new CompanyForUser("company name 7", "dsdadasdddd.", List.of("tag1", "tag2"), 7));
+        companyList.add(new CompanyForUser("company name 8", "nie chce mi sie wymyslac", List.of("tag1", "tag2"), 8));
+        return ResponseEntity.ok(companyList);
     }
 }
