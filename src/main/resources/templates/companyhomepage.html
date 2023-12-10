@@ -14,8 +14,8 @@
             <input type="search" id="search-input" name="search" placeholder="Enter your search">
             <button type="submit">Search</button>
         </form>
-        <a href="About Us" class="about-us">About Us</a>
-        <a href="companycalendar.html" class="calendar">Calendar</a>
+        <a href="#" class="about-us">About Us</a>
+        <a href="#" class="calendar" id="calendarhref">Calendar</a>
         <a href="/login" onclick="logOut()" class="log-out">Log Out</a>
     </nav>
 
@@ -40,19 +40,19 @@
             <section>
                 <section class="section-row" id="sectionRow">
                     <p>Address :</p>
-                    <div id="addressDiv"><p id="addresEdit" contenteditable="false">Warszawska 21</p></div>
+                    <div id="addressDiv"><p id="addresEdit" contenteditable="false"></p></div>
                 </section>
                 <section class="section-row" id="sectionRow">
                     <p>City :</p>
-                    <div id="cityDiv"></div><p id="cityEdit" contenteditable="false">Warsaw</p></div>
+                    <div id="cityDiv"></div><p id="cityEdit" contenteditable="false"></p></div>
                 </section>
                 <section class="section-row" id="sectionRow">
                     <p>Email :</p>
-                    <div id="emailDiv"></div><p id="emailEdit" contenteditable="false">companyemail@gmail.com</p></div>
+                    <div id="emailDiv"></div><p id="emailEdit" contenteditable="false"></p></div>
                 </section>
                 <section class="section-row" id="sectionRow"> 
                     <p>Telephone :</p>
-                    <div id="phoneDiv"></div><p id="phoneEdit" contenteditable="false">123 456 789</p></div>
+                    <div id="phoneDiv"></div><p id="phoneEdit" contenteditable="false"></p></div>
                 </section>
             </section>
             <button id="informations-save-button" style="display: none;" onclick="editInformationsSave()">Save</button>

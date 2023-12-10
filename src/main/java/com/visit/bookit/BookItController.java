@@ -4,10 +4,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +36,8 @@ public class BookItController {
         } else if (loginType.equals("company")){
             if (isValidUser(email, password)) {
                 redirectAttributes.addFlashAttribute("email", email);
-                return "redirect:/companyhome";
+                int companyId = 321;
+                return "redirect:/companyhome?companyId=" + companyId;
             } else {
 
                 return "redirect:/login";
@@ -54,9 +58,19 @@ public class BookItController {
         return "registerpage";
     }
 
+    @GetMapping("/redirectToCompany/{companyId}")
+    public String redirectToComapny(@PathVariable int companyId) {
+        return "redirect:/companyhome?companyId=" + companyId;
+    }
+
     @GetMapping("/redirectUserToCompany/{companyId}")
     public String redirectUser(@PathVariable int companyId) {
         return "redirect:/companyhome?companyId=" + companyId;
+    }
+
+    @GetMapping("/redirectToCalendar/{companyId}")
+    public String redirectCalendar(@PathVariable int companyId) {
+        return "redirect:/companycalendar?companyId=" + companyId;
     }
 
     @GetMapping("/userhome")
@@ -64,10 +78,16 @@ public class BookItController {
         return "userhomepage";
     }
 
-        @GetMapping("/companyhome")
+    @GetMapping("/companyhome")
     public String companyHomePage(Model model) {
         return "companyhomepage";
     }
+
+    @GetMapping("/companycalendar")
+    public String companyCalendar(Model model){
+        return "companycalendar";
+    }
+
 
     private boolean isValidUser(String email, String password) {
         //some logic goes here 
@@ -145,5 +165,21 @@ public class BookItController {
         companyList.add(new CompanyForUser("company name 7", "dsdadasdddd.", List.of("tag1", "tag2"), 7));
         companyList.add(new CompanyForUser("company name 8", "nie chce mi sie wymyslac", List.of("tag1", "tag2"), 8));
         return ResponseEntity.ok(companyList);
+    }
+
+
+    @GetMapping("/getCompanyData/{companyId}")
+    public ResponseEntity <Map<String, String>> getCompanyData(@PathVariable int companyId) {
+
+        System.out.println("aaaasaaaaaaassasassasasas");
+        Map<String, String> companyMap = new HashMap<>();
+        companyMap.put("aboutus", "about company 1");
+        companyMap.put("address", "main street");
+        companyMap.put("city", "newington CT");
+        companyMap.put("email", "jakisemail@gmail.com");
+        companyMap.put("telephone", "123456789");
+        companyMap.put("tags", "#haircut #beauty");
+
+        return ResponseEntity.ok(companyMap);
     }
 }

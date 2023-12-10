@@ -437,3 +437,8 @@ function convertTime(time) {
   time = timeHour + ":" + timeMin + " " + timeFormat;
   return time;
 }
+
+document.getElementById('aboutusonclick').addEventListener('click', function(){
+  console.log("asdasdasd");
+  window.location.href = `/redirectToCompany/${companyId}`;
+})

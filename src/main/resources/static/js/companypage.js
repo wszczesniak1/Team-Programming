@@ -143,3 +143,47 @@ function saveTags() {
 }
 
 showJobs();
+
+//* about us
+//* address
+//* city
+//* email
+//* telephone
+//* tags
+var companyId;
+
+function loadCompanyData() {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    companyId = urlParams.get('companyId');
+
+    console.log(companyId);
+
+
+    fetch(`/getCompanyData/${companyId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(results => {
+           
+            document.getElementById('aboutUsEdit').innerText = results.aboutus;
+            document.getElementById('addressDiv').innerText = results.address;
+            document.getElementById('cityDiv').innerText = results.city;
+            document.getElementById('emailDiv').innerText = results.email;
+            document.getElementById('phoneDiv').innerText = results.telephone;
+        })
+        .catch(error => {
+            console.error('Search error:', error);
+        });
+}
+
+window.onload = function() {
+    loadCompanyData();
+};
+
+document.getElementById('calendarhref').addEventListener('click', function() {
+    window.location.href = `/redirectToCalendar/${companyId}`;
+})
