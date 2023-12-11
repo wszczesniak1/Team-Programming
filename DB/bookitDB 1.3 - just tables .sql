@@ -5,12 +5,12 @@ CREATE TABLE IF NOT EXISTS users (
 	userID INT NOT NULL AUTO_INCREMENT,
 	firstName VARCHAR(255) NOT NULL,
 	lastName VARCHAR(255) NOT NULL,
-	emailAddress VARCHAR(255) NOT NULL,
+	emailAddress VARCHAR(255) NOT NULL UNIQUE,
 	phoneNumber VARCHAR(15),
 	PRIMARY KEY (userID)
 );
 CREATE TABLE IF NOT EXISTS userpassword (
-	userID INT NOT NULL,
+	userID INT NOT NULL UNIQUE,
 	passwordHash VARCHAR(255) NOT NULL,
 	FOREIGN KEY (userID) REFERENCES users (userID)
 );
@@ -20,12 +20,12 @@ CREATE TABLE IF NOT EXISTS company (
 	companyID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
    	companyName VARCHAR(255) NOT NULL,
 	location VARCHAR(255) NOT NULL,
-	companyMail VARCHAR(255) UNIQUE, 
+	companyMail VARCHAR(255) NOT NULL UNIQUE,
 	companyDescription TEXT, 
 	phoneNumber VARCHAR(15)
 );
 CREATE TABLE IF NOT EXISTS companypassword (
-	companyID INT NOT NULL, 
+	companyID INT NOT NULL UNIQUE,
 	passwordHash VARCHAR(255) NOT NULL, 
 	FOREIGN KEY (companyID) REFERENCES company(companyID)
 );
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS eventemployee (
 );
 CREATE TABLE IF NOT EXISTS userevents (
 	userID INT NOT NULL,
-	calendarEventsID INT NOT NULL,
+	calendarEventsID INT NOT NULL UNIQUE,
 	status ENUM ('ended', 'created', 'waiting', 'accepted', 'denied', 'canceled') NOT NULL DEFAULT 'created',
 	FOREIGN KEY (userID) REFERENCES users (userID),
 	FOREIGN KEY (calendarEventsID) REFERENCES calendarEvents (calendarEventsID)
@@ -84,7 +84,7 @@ FOREIGN KEY (tagID) REFERENCES tags(tagID)
 CREATE TABLE IF NOT EXISTS toaccept (
 companyID INT NOT NULL, 
 userID INT NOT NULL, 
-calendarEventsID INT NOT NULL, 
+calendarEventsID INT NOT NULL UNIQUE,
 FOREIGN KEY (companyID) REFERENCES company(companyID), 
 FOREIGN KEY (userID) REFERENCES users(userID), 
 FOREIGN KEY (calendarEventsID) REFERENCES calendarEvents(calendarEventsID)

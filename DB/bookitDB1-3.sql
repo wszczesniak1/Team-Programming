@@ -54,7 +54,7 @@ DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company` (
   `companyID` int NOT NULL AUTO_INCREMENT,
   `location` varchar(255) NOT NULL,
-  `companyMail` varchar(255) DEFAULT NULL,
+  `companyMail` varchar(255) NOT NULL,
   `companyDescription` text,
   `phoneNumber` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`companyID`),
@@ -81,7 +81,7 @@ DROP TABLE IF EXISTS `companypassword`;
 CREATE TABLE `companypassword` (
   `companyID` int NOT NULL,
   `passwordHash` varchar(255) NOT NULL,
-  KEY `companyID` (`companyID`),
+  UNIQUE KEY `companyID` (`companyID`),
   CONSTRAINT `companypassword_ibfk_1` FOREIGN KEY (`companyID`) REFERENCES `company` (`companyID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -238,9 +238,9 @@ CREATE TABLE `toaccept` (
   `companyID` int NOT NULL,
   `userID` int NOT NULL,
   `calendarEventsID` int NOT NULL,
+  UNIQUE KEY `calendarEventsID` (`calendarEventsID`),
   KEY `companyID` (`companyID`),
   KEY `userID` (`userID`),
-  KEY `calendarEventsID` (`calendarEventsID`),
   CONSTRAINT `toaccept_ibfk_1` FOREIGN KEY (`companyID`) REFERENCES `company` (`companyID`),
   CONSTRAINT `toaccept_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
   CONSTRAINT `toaccept_ibfk_3` FOREIGN KEY (`calendarEventsID`) REFERENCES `calendarevents` (`calendarEventsID`)
@@ -267,8 +267,8 @@ CREATE TABLE `userevents` (
   `userID` int NOT NULL,
   `calendarEventsID` int NOT NULL,
   `status` enum('ended','created','waiting','accepted','denied','canceled') NOT NULL DEFAULT 'created',
+  UNIQUE KEY `calendarEventsID` (`calendarEventsID`),
   KEY `userID` (`userID`),
-  KEY `calendarEventsID` (`calendarEventsID`),
   CONSTRAINT `userevents_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`),
   CONSTRAINT `userevents_ibfk_2` FOREIGN KEY (`calendarEventsID`) REFERENCES `calendarevents` (`calendarEventsID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -293,7 +293,7 @@ DROP TABLE IF EXISTS `userpassword`;
 CREATE TABLE `userpassword` (
   `userID` int NOT NULL,
   `passwordHash` varchar(255) NOT NULL,
-  KEY `userID` (`userID`),
+  UNIQUE KEY `userID` (`userID`),
   CONSTRAINT `userpassword_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -320,7 +320,8 @@ CREATE TABLE `users` (
   `last_name` varchar(255) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `phoneNumber` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`userID`)
+  PRIMARY KEY (`userID`),
+  UNIQUE KEY `email_address` (`email_address`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -332,6 +333,14 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'bookit'
+--
+
+--
+-- Dumping routines for database 'bookit'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -342,4 +351,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-02  4:37:29
+-- Dump completed on 2023-12-11 14:03:40
