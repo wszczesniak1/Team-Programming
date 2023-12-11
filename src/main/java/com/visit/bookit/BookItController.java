@@ -10,7 +10,6 @@ import java.util.Map;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,13 +19,79 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class BookItController {
+    
+    //* 
+    //* This classes can be changed or deleted, I used them to test frontend - Pawel
+    //* If you want to delete this classes make sure you create different ones i can use to test frontend
+    //* 
+    public class UserAppointments implements Serializable{
+        @JsonProperty("companyName")
+        private String companyName;
+
+        @JsonProperty("location")
+        private String location;
+
+        @JsonProperty("date")
+        private String date;
+
+        @JsonProperty("time")
+        private String time;
+
+        @JsonProperty("userId")
+        private int companyID;
+
+
+        public UserAppointments(String companyName, String location, String date, String time, int companyID) {
+            this.companyName = companyName;
+            this.location = location;
+            this.date = date;
+            this.time = time;
+            this.companyID = companyID;
+        }
+    }
+
+    public class CompanyForUser implements Serializable{
+        @JsonProperty("companyName")
+        private String companyName;
+    
+        @JsonProperty("location")
+        private String location;
+    
+        @JsonProperty("tags")
+        private List<String> tags;
+    
+        @JsonProperty("companyID")
+        private int companyID;
+    
+
+        public CompanyForUser(String companyName, String location, List<String> tags, int companyID) {
+            this.companyName = companyName;
+            this.location = location;
+            this.tags = tags;
+            this.companyID = companyID;
+        }
+    }
+
+    //* 
+    //* END of classes that can be changed
+    //* 
+    //* 
+
+
+    //* CHANDLE LOGIN */
 
     @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password, @RequestParam String loginType, RedirectAttributes redirectAttributes) {
         
         if(loginType.equals("user")) {
+
+            //* here we need to check if user email is in db and if credentials are correct */
+
             if (isValidUser(email, password)) {
-                redirectAttributes.addFlashAttribute("email", email);
+
+                //* if they are correct, return their ID in @userId */
+
+                redirectAttributes.addFlashAttribute("email", email); // i'll delete it later
                 int userId = 123;
                 return "redirect:/userhome?userId=" + userId;
             } else {
@@ -34,8 +99,13 @@ public class BookItController {
                 return "redirect:/login";
             }
         } else if (loginType.equals("company")){
-            if (isValidUser(email, password)) {
-                redirectAttributes.addFlashAttribute("email", email);
+
+            //* here we need to check if company email is in db and if credentials are correct */
+            if (isValidCompany(email, password)) {
+
+                //* if they are correct, return their ID in @companyId */
+                
+                redirectAttributes.addFlashAttribute("email", email); // i'll delete it later
                 int companyId = 321;
                 return "redirect:/companyhome?companyId=" + companyId;
             } else {
@@ -47,6 +117,11 @@ public class BookItController {
             return "redirect:/login";
         }
     }
+
+    //* REGISTER chandling will be added later */
+
+
+    //* endpoints that dont need changes */
 
     @GetMapping("/login")
     public String loginpage() {
@@ -88,38 +163,35 @@ public class BookItController {
         return "companycalendar";
     }
 
+    //* END OF endpoints that dont need changes */
+    
+
+    //* Function to validate user, add logic */
 
     private boolean isValidUser(String email, String password) {
         //some logic goes here 
         return true;  
     }
 
-    public class UserAppointments implements Serializable{
-        @JsonProperty("companyName")
-        private String companyName;
-    
-        @JsonProperty("location")
-        private String location;
-    
-        @JsonProperty("date")
-        private String date;
-    
-        @JsonProperty("time")
-        private String time;
-    
-        @JsonProperty("userId")
-        private int companyID;
-    
+    //* Function to validate company,  add logic*/
 
-        public UserAppointments(String companyName, String location, String date, String time, int companyID) {
-            this.companyName = companyName;
-            this.location = location;
-            this.date = date;
-            this.time = time;
-            this.companyID = companyID;
-        }
+    private boolean isValidCompany(String email, String password) {
+    //some logic goes here 
+    return true;  
     }
 
+
+    //* Function to get users appointment 
+    //* INPUT: userId 
+    //* OUTPUT: List < Object > 
+    /* Where Object {
+        String companyName;
+        String location;
+        String date;
+        String time;
+        Enum status; // can be just string with "pending", "accepted", "rejected"
+        } */
+    //* Variables need to have @JsonProperty("name") with exact "name" as listed in Object() for JSON corectness?? huh this word
     @GetMapping("/getUserAppo/{userId}")
     public ResponseEntity<List<UserAppointments>> getUserItems(@PathVariable int userId) {
 
@@ -131,27 +203,16 @@ public class BookItController {
         return ResponseEntity.ok(userItems);
     }
 
-    public class CompanyForUser implements Serializable{
-        @JsonProperty("companyName")
-        private String companyName;
-    
-        @JsonProperty("location")
-        private String location;
-    
-        @JsonProperty("tags")
-        private List<String> tags;
-    
-        @JsonProperty("companyID")
-        private int companyID;
-    
-
-        public CompanyForUser(String companyName, String location, List<String> tags, int companyID) {
-            this.companyName = companyName;
-            this.location = location;
-            this.tags = tags;
-            this.companyID = companyID;
-        }
-    }
+    //* Function to get companies user search for
+    //* INPUT: string, as what user typed in search bar 
+    //* OUTPUT: List < Object > 
+    /* Where Object {
+        String companyName;
+        String location;  //* Not sure about it, I guess we can divide location to city and address, will be easier
+        List<String> tags;
+        int companyID;
+        } */
+    //* Variables need to have @JsonProperty("name") with exact "name" as listed in Object() for JSON corectness?? huh this word
 
     @GetMapping("/serachForCompanies")
     public ResponseEntity <List<CompanyForUser>> searchForCompanies(@RequestParam String str) {
@@ -167,10 +228,26 @@ public class BookItController {
         return ResponseEntity.ok(companyList);
     }
 
+    //* Function to get company data from db for main page
+    //* INPUT: companyId
+    //* OUTPUT: < HashMap > or < Object >
+    /* Where Object {
+        String aboutus;
+        String address;
+        String city;
+        String email;
+        String phoneNumber;
+        List<String> tags;
+        int companyID;
+        } */
+    //* Variables need to have @JsonProperty("name") with exact "name" as listed in Object() for JSON corectness?? huh this word
+    
 
     @GetMapping("/getCompanyData/{companyId}")
     public ResponseEntity <Map<String, String>> getCompanyData(@PathVariable int companyId) {
 
+
+        // baza danych
         System.out.println("aaaasaaaaaaassasassasasas");
         Map<String, String> companyMap = new HashMap<>();
         companyMap.put("aboutus", "about company 1");
@@ -182,4 +259,11 @@ public class BookItController {
 
         return ResponseEntity.ok(companyMap);
     }
+
+    //* TO BE ADDED */
+    /* 
+     * Function to get calendar data
+     * Function to add employee ? 
+     * More and more <3
+     */
 }
