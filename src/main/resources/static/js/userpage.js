@@ -127,6 +127,8 @@ function getFutureAppointments() {
     }
 }
 
+
+// last time i checked
 window.onload = function() {
     // getUserId();
 
