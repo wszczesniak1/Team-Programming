@@ -38,32 +38,6 @@ const data = [
     { name: 'Item 9', Location: 'Value 5', phone: 'Value 6' },
 ];
 
-// function search() {
-//     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-//     console.log(searchTerm);
-
-//     // Clear previous results
-//     resultsContainer.innerHTML = '';
-//     // Filter data based on search term
-//     const filteredData = data.filter(item =>
-//         item.name.toLowerCase().includes(searchTerm) ||
-//         item.Location.toLowerCase().includes(searchTerm) ||
-//         item.phone.toLowerCase().includes(searchTerm)
-//     );
-
-//     // Display results
-//     filteredData.forEach(item => {
-//         const resultItem = document.createElement('div');
-//         resultItem.classList.add('result-item');
-//         resultItem.innerHTML = `
-//             <strong>${item.name}</strong><br>
-//             Location: ${item.Location}<br>
-//             Phone number: ${item.phone}
-//         `;
-//         resultsContainer.appendChild(resultItem);
-//     });
-// }
-
 function search() {
     // Get the search term from the input field
     const searchTerm = document.getElementById("searchInput").value;
@@ -107,19 +81,6 @@ const appointData = [
 ]
 
 function getFutureAppointments() {
-    // var appointmentsContainer = document.getElementById('appointmentsContainer');
-
-    // appointData.forEach(item => {
-    //     const resultItem = document.createElement('div');
-    //     resultItem.classList.add('appointment-item');
-    //     resultItem.innerHTML = `
-    //         <strong>${item.name}</strong><br>
-    //         Location: ${item.Location}<br>
-    //         Date: ${item.date}<br>
-    //         Time: ${item.time}
-    //     `;
-    //     appointmentsContainer.appendChild(resultItem);
-    // });
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('userId');
 
@@ -165,15 +126,6 @@ function getFutureAppointments() {
             
     }
 }
-
-// function getUserId() {
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const userId = urlParams.get('userId');
-
-//     // Store user ID in local storage
-//     localStorage.setItem('userId', userId);
-//     console.log(userId);
-// }
 
 window.onload = function() {
     // getUserId();
