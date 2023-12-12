@@ -242,6 +242,8 @@ public class BookItController {
         } */
     //* Variables need to have @JsonProperty("name") with exact "name" as listed in Object() for JSON corectness?? huh this word
     
+
+    
     @GetMapping("/getCompanyData/{companyId}")
     public ResponseEntity <Map<String, String>> getCompanyData(@PathVariable int companyId) {
 
