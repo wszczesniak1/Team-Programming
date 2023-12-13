@@ -1,0 +1,43 @@
+CREATE TABLE IF NOT EXISTS company (
+companyID INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+   	companyName VARCHAR(255) NOT NULL,
+location VARCHAR(255) NOT NULL,
+companyMail VARCHAR(255) NOT NULL UNIQUE, 
+companyDescription TEXT, 
+phoneNumber VARCHAR(15)
+);
+
+CREATE TABLE IF NOT EXISTS companytags (
+companyID INT NOT NULL, 
+tagID INT NOT NULL, 
+FOREIGN KEY (companyID) REFERENCES company(companyID), 
+FOREIGN KEY (tagID) REFERENCES tags(tagID)
+);
+
+CREATE TABLE IF NOT EXISTS companypassword (
+companyID INT NOT NULL UNIQUE, 
+passwordHash VARCHAR(255) NOT NULL, 
+FOREIGN KEY (companyID) REFERENCES company(companyID)
+);
+
+CREATE TABLE IF NOT EXISTS toaccept (
+companyID INT NOT NULL, 
+userID INT NOT NULL, 
+calendarEventsID INT NOT NULL UNIQUE, 
+FOREIGN KEY (companyID) REFERENCES company(companyID), 
+FOREIGN KEY (userID) REFERENCES users(userID), 
+FOREIGN KEY (calendarEventsID) REFERENCES calendarEvents(calendarEventsID)
+);
+
+CREATE TABLE IF NOT EXISTS tags (
+tagID INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+tagName VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS employee (
+employeeID INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+companyID INT NOT NULL, 
+employeeFName VARCHAR(255) NOT NULL, 
+employeeLName VARCHAR(255) NOT NULL,
+FOREIGN KEY (companyID) REFERENCES company(companyID), 
+);
