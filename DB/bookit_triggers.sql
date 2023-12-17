@@ -32,7 +32,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER delete_event_details
-BEFORE DELETE ON teventdetails
+BEFORE DELETE ON eventdetails
 FOR EACH ROW
 BEGIN
 DELETE FROM calendarevents WHERE OLD.eventdetailsID = eventdetailsID;
