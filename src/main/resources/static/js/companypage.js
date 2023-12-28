@@ -168,7 +168,7 @@ function loadCompanyData() {
             return response.json();
         })
         .then(results => {
-           
+            // add fetching company name
             document.getElementById('aboutUsEdit').innerText = results.aboutus;
             document.getElementById('addressDiv').innerText = results.address;
             document.getElementById('cityDiv').innerText = results.city;
@@ -180,8 +180,161 @@ function loadCompanyData() {
         });
 }
 
+// function openAddEmployeeForm() {
+//     document.getElementById('addEmpDialog').showModal();
+// }
+
+var dialog = document.getElementById('addEmpDialog');
+var addEmp = document.getElementById('confirmBtn');
+var cancleEmp = document.getElementById('cancelBtn');
+
+document.getElementById('addEmployeeButton').addEventListener("click", () => {
+  dialog.showModal();
+});
+
+addEmp.addEventListener('click', () => {
+  let fname = document.getElementById("fname");
+  let lname = document.getElementById("lname");
+
+  // sent data to server to update DB 
+  alert("This form has been successfully submitted!");
+  var paragraphElement = document.createElement('p');
+  paragraphElement.textContent = fname.value;
+  var container = document.getElementById('employeeContainer');
+  container.appendChild(paragraphElement);
+  fname.value = "";
+  lname.value = "";
+  dialog.close();
+})
+
+cancleEmp.addEventListener("click", (e) => {
+  e.preventDefault();
+  dialog.close();
+});
+
+var toAccList = document.getElementById('listToAccept');
+
+function createToAcceptDiv(text) {
+  var toAcceptDiv = document.createElement("div");
+  toAcceptDiv.classList.add("to-accept-div");
+
+  var paragraph = document.createElement("p");
+  paragraph.textContent = text;
+  toAcceptDiv.appendChild(paragraph);
+
+  var acceptButton = document.createElement("button");
+  acceptButton.classList.add("acceptButton");
+  acceptButton.textContent = "A";
+  toAcceptDiv.appendChild(acceptButton);
+
+  var rejectButton = document.createElement("button");
+  rejectButton.classList.add("rejectButton");
+  rejectButton.textContent = "X";
+  toAcceptDiv.appendChild(rejectButton);
+
+  return toAcceptDiv;
+}
+
+toAccList.addEventListener("click", function(event) {
+  
+  if (event.target.classList.contains("rejectButton")) {
+    // if not accepted send rejected to db
+      var toAcceptDiv = event.target.closest(".to-accept-div");
+      if (toAcceptDiv) {
+          toAcceptDiv.remove();
+      }
+  } else  if (event.target.classList.contains("acceptbutton")) {
+    // if accept send accepted to db 
+    var toAcceptDiv = event.target.closest(".to-accept-div");
+    if (toAcceptDiv) {
+      toAcceptDiv.style = "    background-color: black;";
+    }
+}
+});
+
+function loadEmployeeList() {
+    const urlParams = new URLSearchParams(window.location.search);
+    companyId = urlParams.get('companyId');
+
+    console.log(companyId);
+
+
+    fetch(`/getCompanyEmployeeList/${companyId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(results => {
+           
+            // loop throgh elements add add to div 
+            // add delete button
+        })
+        .catch(error => {
+            console.error('Search error:', error);
+        });
+}
+
+function loadReservationToAccept() {
+
+  // var toAccList = document.getElementById('listToAccept');
+  // have function to create to-accept-divs
+  const urlParams = new URLSearchParams(window.location.search);
+  companyId = urlParams.get('companyId');
+
+  console.log(companyId);
+
+
+  fetch(`/getCompanyEmployeeList/${companyId}`)
+      .then(response => {
+          if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+      })
+      .then(results => {
+         
+        results.forEach(res => {
+          // var listToAccept = document.createElement("div");
+          // listToAccept.classList.add("list-to-accept");
+
+          // // Add multiple "to-accept-div" elements
+          // for (var i = 1; i <= 3; i++) {
+          //     var toAcceptDiv = createToAcceptDiv("to accediv t " + i);
+          //     listToAccept.appendChild(toAcceptDiv);
+          // }
+
+          // // Add click event listener to handle reject button clicks
+          // listToAccept.addEventListener("click", function(event) {
+          //     if (event.target.classList.contains("rejectButton")) {
+          //         var toAcceptDiv = event.target.closest(".to-accept-div");
+          //         if (toAcceptDiv) {
+          //             toAcceptDiv.remove();
+          //         }
+          //     }
+          // });
+
+          // document.body.appendChild(listToAccept);
+        })
+
+      })
+      .catch(error => {
+          console.error('Search error:', error);
+      });
+  
+    //* Load reservation and put them into div
+
+    // name, date, time, userName and 2 buttons with confirmation
+    // * get reservation id
+    // * when accepted send accepted to db for user with id ?
+    // * when rejected send rejected with i guess id ?
+}
+
 window.onload = function() {
     loadCompanyData();
+    loadEmployeeList();
+    loadReservationToAccept();
 };
 
 document.getElementById('calendarhref').addEventListener('click', function() {

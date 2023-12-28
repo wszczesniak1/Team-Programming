@@ -102,6 +102,11 @@ main button {
     font-size: large;
 }
 
+.add-employee-button {
+    background-color:#439b46;
+    width: 100px;
+}
+
 .section-row {
     display: flex;
     gap: 10px;
@@ -123,6 +128,36 @@ main button {
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #eee;
+}
+
+.employee-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+}
+
+.row-column-emp-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.list-to-accept {
+    overflow-y:scroll;
+    max-height: 600px;
+}
+
+.to-accept-div {
+    background-color: red;
+    padding: 5px;
+    margin: 5px;
+    display: flex;
+    gap: 5px;
+    flex-direction: row;
+    align-items: center;
 }
 
 .tag.selected {
