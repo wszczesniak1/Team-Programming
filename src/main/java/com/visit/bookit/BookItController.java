@@ -159,7 +159,8 @@ public class BookItController {
 
     @GetMapping("/redirectUserToCompany/{companyId}")
     public String redirectUser(@PathVariable int companyId) {
-        return "redirect:/companyhome?companyId=" + companyId;
+        System.out.println("blablabla");
+        return "redirect:/usercalendar?companyId=" + companyId;
     }
 
     @GetMapping("/redirectToCalendar/{companyId}")
@@ -170,6 +171,11 @@ public class BookItController {
     @GetMapping("/userhome")
     public String userHomePage(Model model) {
         return "userhomepage";
+    }
+
+    @GetMapping("/usercalendar")
+    public String userCalendarPage(Model model) {
+        return "usercalendar";
     }
 
     @GetMapping("/companyhome")
@@ -280,8 +286,9 @@ public class BookItController {
         return ResponseEntity.ok(companyMap);
     }
 
+    // companyEvents
     @GetMapping("/getEventsFromCompany/{companyId}")
-    public ResponseEntity<List<companyEvents>> getCompanyEvents(@PathVariable int companyId) {
+    public ResponseEntity<List<Integer>> getCompanyEvents(@PathVariable int companyId) {
         
 
         //* return list of objects companyEvents where is :
@@ -291,17 +298,24 @@ public class BookItController {
             // date of event
             // price
             // employee name
-        return 0;
+        List<Integer> arrayList = new ArrayList<>();
+        arrayList.add(3);
+        arrayList.add(3);
+        arrayList.add(3);
+
+        return ResponseEntity.ok(arrayList);
     }
 
     @PostMapping("/putEventToDatabase/{companyId}")
     public void putEvent( @RequestBody String data, @PathVariable int companyId){
 
         // put event to db with id of company
+        System.out.println("event to company " + data + " " + companyId);
     }
 
+    // companyEvents
     @GetMapping("/getEventsFromCompanyForUser/{companyId}")
-    public ResponseEntity<List<companyEvents>> getCompanyEventsForUser(@PathVariable int companyId) {
+    public ResponseEntity<List<Integer>> getCompanyEventsForUser(@PathVariable int companyId) {
         
 
         //* return list of objects companyEvents where is :
@@ -312,18 +326,36 @@ public class BookItController {
             // date of event
             // price
             // employee name
-        return 0;
+        List<Integer> arrayList = new ArrayList<>();
+        arrayList.add(2);
+        arrayList.add(2);
+        arrayList.add(2);
+
+        return ResponseEntity.ok(arrayList);
     }
 
+    // employee
     @GetMapping("/getCompanyEmployeeList/{companyId}")
-    public ResponseEntity<List<employee>> getEmployeeList(@PathVariable int companyId) {
+    public ResponseEntity<List<Integer>> getEmployeeList(@PathVariable int companyId) {
+        List<Integer> arrayList = new ArrayList<>();
+        arrayList.add(0);
+        arrayList.add(1);
+        arrayList.add(2);
 
+        return ResponseEntity.ok(arrayList);
         //* Return list of employees that company has from db
     }
 
+    // EventsToAccept
     @GetMapping("/getCompanyReservationToAccept/{companyId}")
-    public ResponseEntity<List<EventsToAccept>> getCompanyReservationToAccept(@PathVariable int companyId){
+    public ResponseEntity<List<Integer>> getCompanyReservationToAccept(@PathVariable int companyId){
 
+        List<Integer> arrayList = new ArrayList<>();
+        arrayList.add(1);
+        arrayList.add(1);
+        arrayList.add(1);
+
+        return ResponseEntity.ok(arrayList);
         //* Return list of events to accept by company id
     }
 

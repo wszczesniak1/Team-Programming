@@ -268,6 +268,8 @@ function loadEmployeeList() {
         })
         .then(results => {
            
+
+            console.log(results);
             // loop throgh elements add add to div 
             // add delete button
         })
@@ -294,29 +296,31 @@ function loadReservationToAccept() {
           return response.json();
       })
       .then(results => {
+
+        console.log(results);
          
-        results.forEach(res => {
-          // var listToAccept = document.createElement("div");
-          // listToAccept.classList.add("list-to-accept");
+        // results.forEach(res => {
+        //   // var listToAccept = document.createElement("div");
+        //   // listToAccept.classList.add("list-to-accept");
 
-          // // Add multiple "to-accept-div" elements
-          // for (var i = 1; i <= 3; i++) {
-          //     var toAcceptDiv = createToAcceptDiv("to accediv t " + i);
-          //     listToAccept.appendChild(toAcceptDiv);
-          // }
+        //   // // Add multiple "to-accept-div" elements
+        //   // for (var i = 1; i <= 3; i++) {
+        //   //     var toAcceptDiv = createToAcceptDiv("to accediv t " + i);
+        //   //     listToAccept.appendChild(toAcceptDiv);
+        //   // }
 
-          // // Add click event listener to handle reject button clicks
-          // listToAccept.addEventListener("click", function(event) {
-          //     if (event.target.classList.contains("rejectButton")) {
-          //         var toAcceptDiv = event.target.closest(".to-accept-div");
-          //         if (toAcceptDiv) {
-          //             toAcceptDiv.remove();
-          //         }
-          //     }
-          // });
+        //   // // Add click event listener to handle reject button clicks
+        //   // listToAccept.addEventListener("click", function(event) {
+        //   //     if (event.target.classList.contains("rejectButton")) {
+        //   //         var toAcceptDiv = event.target.closest(".to-accept-div");
+        //   //         if (toAcceptDiv) {
+        //   //             toAcceptDiv.remove();
+        //   //         }
+        //   //     }
+        //   // });
 
-          // document.body.appendChild(listToAccept);
-        })
+        //   // document.body.appendChild(listToAccept);
+        // })
 
       })
       .catch(error => {

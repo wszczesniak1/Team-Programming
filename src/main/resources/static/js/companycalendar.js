@@ -107,6 +107,10 @@ addEventButton.addEventListener('click', () => {
 })
 var eventsContainer = document.getElementById("eventsContainer");
 
+var companyId = 1;
+
+
+
 addEmp.addEventListener('click', (event) => {
   // let fname = document.getElementById("fname");
   // let lname = document.getElementById("lname");
@@ -201,7 +205,7 @@ cancleEmp.addEventListener("click", (e) => {
 
 // load all events and add to array
 function loadAllEvents() {
-    fetch(`/geEventsFromCompany/${companyID}`)
+    fetch(`/getEventsFromCompany/${companyId}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -210,10 +214,12 @@ function loadAllEvents() {
         })
         .then(results => {
 
-            results.forEach(item => {
-                // create events list with < details > 
-                // and button to book and if book send book request to db
-            });
+            console.log(results);
+
+            // results.forEach(item => {
+            //     // create events list with < details > 
+            //     // and button to book and if book send book request to db
+            // });
         })
         .catch(error => {
             console.error('Search error:', error);
@@ -224,3 +230,10 @@ function loadAllEvents() {
 function getEvent(day, month, year) {
 
 }
+
+document.getElementById('aboutusonclick').addEventListener('click', () => {
+    window.location.href = `/redirectToCompany/${companyId}`;
+})
+
+
+loadAllEvents();

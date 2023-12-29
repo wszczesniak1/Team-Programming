@@ -1,3 +1,5 @@
+var companyId = 1;
+
 const daysTag = document.querySelector(".days"),
 currentDate = document.querySelector(".current-date"),
 prevNextIcon = document.querySelectorAll(".icons span");
@@ -89,7 +91,11 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
 });
 
 
+
 function getCompanyEvents () {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    companyId = urlParams.get('companyId');
 
     fetch(`/getEventsFromCompanyForUser/${companyId}`)
     .then(response => {
@@ -100,10 +106,12 @@ function getCompanyEvents () {
     })
     .then(results => {
 
-        results.forEach(item => {
-            // create events list with < details > 
-            // and button to book and if book send book request to db
-        });
+
+        console.log(results);
+        // results.forEach(item => {
+        //     // create events list with < details > 
+        //     // and button to book and if book send book request to db
+        // });
     })
     .catch(error => {
         console.error('Search error:', error);
@@ -114,3 +122,5 @@ function loadPossibleEvents(day, month, year) {
 
     // get events from array with specific day and month
 }
+
+getCompanyEvents();

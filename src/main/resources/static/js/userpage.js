@@ -63,7 +63,7 @@ function search() {
                 `;
 
                 resultItem.addEventListener("click", function(){
-                    // console.log("Company ID:", item.companyID);
+                    console.log("Company ID:", item.companyID);
                     window.location.href = `/redirectUserToCompany/${item.companyID}`;
                 })
                 resultsContainer.appendChild(resultItem);
