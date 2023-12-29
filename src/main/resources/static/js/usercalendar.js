@@ -7,10 +7,7 @@ let date = new Date(),
 currYear = date.getFullYear(),
 currMonth = date.getMonth();
 
-let date1 = new Date(),
-currYear1 = date.getFullYear(),
-currMonth1 = date.getMonth();
-
+// storing full name of all months in array
 const months = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"];
 
@@ -19,10 +16,10 @@ const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frida
 
 const renderCalendar = () => {
 
-    document.getElementById('noDay').textContent = date1.getDate();
-    document.getElementById('nameOfDay').textContent = weekdays[date1.getDay() +1];
-    document.getElementById('nameOfMonth').textContent = months[currMonth1];
-    document.getElementById('noYear').textContent = currYear1;
+    // document.getElementById('noDay').textContent = date.getDate();
+    // document.getElementById('nameOfDay').textContent = weekdays[date.getDay() +1];
+    // document.getElementById('nameOfMonth').textContent = months[currMonth];
+    // document.getElementById('noYear').textContent = currYear;
 
     let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
     lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
@@ -91,117 +88,11 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
     });
 });
 
-var addEventButton = document.getElementById('addEventBtn');
-var dialog = document.getElementById('addEventDialog');
-var addEmp = document.getElementById('confirmBtn');
-var cancleEmp = document.getElementById('cancelBtn');
 
-addEventButton.addEventListener('click', () => {
-  dialog.showModal();
-  // add dialog with 
-  // name of event
-  // date, time
-  // select employee from list
-  // price
-  // add button and cancle button 
-})
-var eventsContainer = document.getElementById("eventsContainer");
-
-addEmp.addEventListener('click', (event) => {
-  // let fname = document.getElementById("fname");
-  // let lname = document.getElementById("lname");
-  event.preventDefault();
-  // sent data to server to update DB 
-  alert("This form has been successfully submitted!");
-
-  startTimeValue = document.getElementById("time1").value;
-  endTimeValue = document.getElementById("duration").value;
-
-  // Create Date objects with a common date (January 1, 1970) and the retrieved time values
-  startDate = new Date(`1970-01-01T${startTimeValue}`);
-  endDate = new Date(`1970-01-01T${endTimeValue}`);
-
-  // Calculate the time difference in milliseconds
-  timeDifferenceMillis = endDate - startDate;
-
-  // Convert milliseconds to hours and minutes
-  hours = Math.floor(timeDifferenceMillis / (1000 * 60 * 60));
-  minutes = Math.floor((timeDifferenceMillis % (1000 * 60 * 60)) / (1000 * 60));
+function loadPossibleEvents(day, month, year) {
 
 
-  dataToSend = {
-    title: document.getElementById('title').value,
-    startTime: document.getElementById('time1').value,
-    duration: hours*60 + minutes,
-    price: document.getElementById('price').value
-    // employeeID? employeeName:
-  };
-
-  var eventDiv = document.createElement("div");
-  eventDiv.classList.add("event-container");
-
-  // Create elements for the event details
-  var titleElement = document.createElement("h2");
-  titleElement.textContent = dataToSend.title;
-
-  var startTimeElement = document.createElement("p");
-  startTimeElement.textContent = `Start Time: ${dataToSend.startTime}`;
-
-  var endTimeElement = document.createElement("p");
-  endTimeElement.textContent = `End Time: ${dataToSend.duration}`;
-
-  var priceElement = document.createElement("p");
-  priceElement.textContent = `Price: ${dataToSend.price}`;
-
-  // userNameElement = document.createElement("p");
-  // userNameElement.textContent = `User: ${dataToSend.userName}`;
-
-  // Append elements to the event div
-  eventDiv.appendChild(titleElement);
-  eventDiv.appendChild(startTimeElement);
-  eventDiv.appendChild(endTimeElement);
-  eventDiv.appendChild(priceElement);
-  // eventDiv.appendChild(userNameElement);
-
-  // Append the event div to the container
-  eventsContainer.appendChild(eventDiv);
-  // fetch(`/putEventToDatabase?companyId=${companyID}`, {
-  //   method: "POST",
-  //   headers: {
-  //       "Content-Type": "application/json"
-  //   },
-  //   body: JSON.stringify(dataToSend)
-  // })
-  // .then(response => {
-  //     if (!response.ok) {
-  //         throw new Error(`HTTP error! Status: ${response.status}`);
-  //     }
-  //     return response.text();
-  // })
-  // .then(responseText => {
-  //     console.log(responseText); // Process the response from the server
-  // })
-  // .catch(error => {
-  //     console.error("Fetch error:", error);
-  // });
-
-  // te info tez trzeba wyslac jako date na serwer
-  console.log(document.getElementById('noDay').textContent);
-  console.log(currMonth + 1);
-  console.log(document.getElementById('noYear').textContent);
-  console.log(dataToSend);
-
-  dialog.close();
-})
-
-cancleEmp.addEventListener("click", (e) => {
-  e.preventDefault();
-  dialog.close();
-});
-
-// load all events and add to array
-function loadAllEvents() {
-    fetch(`/geEventsFromCompany?companyId=${companyID}`)
+    fetch(`/geEventsOnDay?day=${day}&month=${month}&year=${year}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -218,9 +109,4 @@ function loadAllEvents() {
         .catch(error => {
             console.error('Search error:', error);
         });
-}
-
-// get events on specific day from array
-function getEvent(day, month, year) {
-
 }
