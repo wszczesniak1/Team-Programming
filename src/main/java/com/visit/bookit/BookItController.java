@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -79,6 +80,24 @@ public class BookItController {
 
 
     //* CHANDLE LOGIN */
+
+    @PostMapping("/companyRegister")
+    public String compRegister(@RequestParam String name, @RequestParam String street, @RequestParam String city, @RequestParam String phone, @RequestParam String email, @RequestParam String password){
+
+
+        //* Add company to Db and redirect to login page, or return 0 if already exists, can be as string like return "0"; 
+
+        return "redirect:/login";
+    }
+
+    @PostMapping("/userRegister")
+    public String userRegister(@RequestParam String fname, @RequestParam String lname, @RequestParam String phone, @RequestParam String email, @RequestParam String password){
+
+
+        //* Add user to Db and redirect to login page, or return 0 if already exists, can be as string like return "0"; 
+
+        return "redirect:/login";
+    }
 
     @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password, @RequestParam String loginType, RedirectAttributes redirectAttributes) {
@@ -261,10 +280,60 @@ public class BookItController {
         return ResponseEntity.ok(companyMap);
     }
 
-    //* TO BE ADDED */
-    /* 
-     * Function to get calendar data
-     * Function to add employee ? 
-     * More and more <3
-     */
+    @GetMapping("/getEventsFromCompany/{companyId}")
+    public ResponseEntity<List<companyEvents>> getCompanyEvents(@PathVariable int companyId) {
+        
+
+        //* return list of objects companyEvents where is :
+            // title
+            // time that event starts
+            // duration of event
+            // date of event
+            // price
+            // employee name
+        return 0;
+    }
+
+    @PostMapping("/putEventToDatabase/{companyId}")
+    public void putEvent( @RequestBody String data, @PathVariable int companyId){
+
+        // put event to db with id of company
+    }
+
+    @GetMapping("/getEventsFromCompanyForUser/{companyId}")
+    public ResponseEntity<List<companyEvents>> getCompanyEventsForUser(@PathVariable int companyId) {
+        
+
+        //* return list of objects companyEvents where is :
+        //! Return only events that are for reservation not that are already reserved cuz they are for user view
+            // title
+            // time that event starts
+            // duration of event
+            // date of event
+            // price
+            // employee name
+        return 0;
+    }
+
+    @GetMapping("/getCompanyEmployeeList/{companyId}")
+    public ResponseEntity<List<employee>> getEmployeeList(@PathVariable int companyId) {
+
+        //* Return list of employees that company has from db
+    }
+
+    @GetMapping("/getCompanyReservationToAccept/{companyId}")
+    public ResponseEntity<List<EventsToAccept>> getCompanyReservationToAccept(@PathVariable int companyId){
+
+        //* Return list of events to accept by company id
+    }
+
+    @PostMapping("/sendUpdateAboutReservation/")
+    public void sendUpdateAboutReservation(@RequestBody String data) {
+        //* data is :
+            // eventId
+            // 1 / 0  ##### 1 - if accepted event by company, 0 if no
+
+        //* Update  db for user events and delete from company to accept table
+    }
+
 }

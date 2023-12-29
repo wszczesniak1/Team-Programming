@@ -201,7 +201,7 @@ cancleEmp.addEventListener("click", (e) => {
 
 // load all events and add to array
 function loadAllEvents() {
-    fetch(`/geEventsFromCompany?companyId=${companyID}`)
+    fetch(`/geEventsFromCompany/${companyID}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);

@@ -89,24 +89,28 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
 });
 
 
+function getCompanyEvents () {
+
+    fetch(`/getEventsFromCompanyForUser/${companyId}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(results => {
+
+        results.forEach(item => {
+            // create events list with < details > 
+            // and button to book and if book send book request to db
+        });
+    })
+    .catch(error => {
+        console.error('Search error:', error);
+    });
+}
+
 function loadPossibleEvents(day, month, year) {
 
-
-    fetch(`/geEventsOnDay?day=${day}&month=${month}&year=${year}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(results => {
-
-            results.forEach(item => {
-                // create events list with < details > 
-                // and button to book and if book send book request to db
-            });
-        })
-        .catch(error => {
-            console.error('Search error:', error);
-        });
+    // get events from array with specific day and month
 }
