@@ -9,7 +9,7 @@
 </head>
 <body>
     <nav class="blure-it">
-        <h2 th:text="${email} ? 'Hello ' + ${email} : 'Hello (No Email)'">Hello, email</h2>
+        <h2 id="userEmail"></h2>
         <a href="/login" onclick="logOut()" class="log-out">Log Out</a>
     </nav>
 
@@ -23,8 +23,17 @@
                 <button class="cancel-search" id="cancleSearch" onclick="cancleSearch()" style="display: none;">X</button>
             </div>
             <div class="city-tags-search" id="cityTagsSearch" style="visibility: hidden;">
-                <div>
-                    <p>choose city</p>
+                <div class="dropdown">
+                    <!-- Button that triggers the dropdown -->
+                    <button class="dropdown-button" id="dropdownButton">Choose city</button>
+                
+                    <!-- Dropdown content -->
+                    <div class="dropdown-content">
+                        <!-- Links or items in the dropdown -->
+                        <a href="#" onclick="changeButtonText(this)">Warsaw</a>
+                        <a href="#" onclick="changeButtonText(this)">New York</a>
+                        <a href="#" onclick="changeButtonText(this)">Chicago</a>
+                    </div>
                 </div>
                 <button class="search-button" id="searchButton" onclick="search()">Search</button>
             </div>

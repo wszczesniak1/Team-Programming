@@ -206,6 +206,14 @@ public class BookItController {
     }
 
 
+    @GetMapping("/getUserInfo/{userId}")
+    public ResponseEntity<Map<String,String>> getUserInfo(@PathVariable int userId) {
+        Map<String, String> userMap = new HashMap<>();
+        userMap.put("email", "thatsUserEmail@gmail.com");
+
+        return ResponseEntity.ok(userMap);
+    }
+
     //* Function to get users appointment 
     //* INPUT: userId 
     //* OUTPUT: List < Object > 
@@ -215,11 +223,13 @@ public class BookItController {
         String date;
         String time;
         Enum status; // can be just string with "pending", "accepted", "rejected"
+        Int appointmentId;
         } */
     //* Variables need to have @JsonProperty("name") with exact "name" as listed in Object() for JSON corectness?? huh this word
     @GetMapping("/getUserAppo/{userId}")
     public ResponseEntity<List<UserAppointments>> getUserItems(@PathVariable int userId) {
 
+        // user id change to appo id or company id not sure yet
         List<UserAppointments> userItems = new ArrayList<>();
         userItems.add(new UserAppointments("firma 1", "New York", "21-12-2023", "10:31", userId));
         userItems.add(new UserAppointments("firma 2", "Warsaw", "21-11-2023", "12:21", userId));

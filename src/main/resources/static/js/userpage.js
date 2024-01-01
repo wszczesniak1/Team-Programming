@@ -3,6 +3,7 @@ var cityTags = document.getElementById('cityTagsSearch');
 var sectionElement = document.getElementById('mainSearchSection');
 var wrapperElement = document.getElementById('toBlur');
 var resultsContainer = document.getElementById('searchResultContainer');
+var userId;
 
 document.getElementById('searchBar').addEventListener('click', function () {
     cityTags.style = "visibility: true";
@@ -59,7 +60,6 @@ function search() {
                     <strong>${item.companyName}</strong><br>
                     Location: ${item.location}<br>
                     Tags: ${item.tags}<br>
-                    companyId: ${item.companyID}
                 `;
 
                 resultItem.addEventListener("click", function(){
@@ -82,7 +82,7 @@ const appointData = [
 
 function getFutureAppointments() {
     const urlParams = new URLSearchParams(window.location.search);
-    const userId = urlParams.get('userId');
+    userId = urlParams.get('userId');
 
     console.log(userId);
     if (!userId) {
@@ -108,14 +108,28 @@ function getFutureAppointments() {
                     itemDiv.classList.add('appointment-item');
                     // Set the content of the div using item properties
                     itemDiv.innerHTML = `
-                        <p>Company: ${item.companyName}</p>
-                        <p>Location: ${item.location}</p>
-                        <p>Date: ${item.date}</p>
-                        <p>Time: ${item.time}</p>
-                        <p>User ID: ${item.userId}</p>
+                        <p>Company: <br> ${item.companyName}</p>
+                        <p>Location: <br>${item.location}</p>
+                        <p>Date: <br>${item.date}</p>
+                        <p>Time: <br>${item.time}</p>
                     `;
+
+                    const button = document.createElement("button");
+                    button.classList.add('cancle-app-btn');
+                    button.innerHTML = "Cancel appointment"; // Set the button text or content
+                    button.addEventListener("click", function() {
+                        
+                        
+                        // send to db data about this event so it can update user db and events for company
+                        var confirmDelete = window.confirm("Are you sure you want to cancel this appointment?");
         
-                    // Append the div to the container
+                        if (confirmDelete) {
+                            // Get the parent container of the button (itemDiv) and remove it
+                            appointmentsContainer.removeChild(itemDiv);
+                        }
+                    });
+
+                    itemDiv.appendChild(button);        
                     appointmentsContainer.appendChild(itemDiv);
                 });
             })
@@ -127,11 +141,39 @@ function getFutureAppointments() {
     }
 }
 
+function getUserInfo() {
+    const urlParams = new URLSearchParams(window.location.search);
+    userId = urlParams.get('userId');
+
+    fetch(`/getUserInfo/${userId}`)
+            .then(response => {
+                // Check if the request was successful (status code 200-299)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+    
+                // Parse the response JSON
+                return response.json();
+            })
+            .then(results => {
+                document.getElementById('userEmail').innerText = results.email;
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+}
 
 // last time i checked
 window.onload = function() {
     // getUserId();
 
-
+    getUserInfo();
     getFutureAppointments();
 };
+
+function changeButtonText(link) {
+    // Get the text content of the clicked link
+    var newText = link.textContent;
+    // Set the text of the button to the selected link
+    document.getElementById('dropdownButton').textContent = newText;
+}
