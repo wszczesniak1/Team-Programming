@@ -192,14 +192,54 @@ document.getElementById('addEmployeeButton').addEventListener("click", () => {
   dialog.showModal();
 });
 
+function createEmployee(fname, lname) {
+
+  const employeediv = document.createElement("div");
+
+  employeediv.classList.add("emp-tile");
+
+  var div1 = document.createElement("div");
+  div1.classList.add("row-it");
+
+  var p1 = document.createElement("p");
+  p1.classList.add("paragraph"); 
+  p1.textContent = fname;
+  var p2 = document.createElement("p");
+  p2.classList.add("paragraph"); 
+  p2.textContent = lname;
+  
+  div1.appendChild(p1);
+  div1.appendChild(p2);
+
+  employeediv.appendChild(div1);
+
+  const button = document.createElement("button");
+  button.classList.add('cancle-app-btn');
+  button.innerHTML = "X"; // Set the button text or content
+  button.addEventListener("click", function() {
+      
+      
+      // send to db data about this event so it can update user db and events for company
+      var confirmDelete = window.confirm("Are you sure you want to delete this employee?");
+
+      if (confirmDelete) {
+          // Get the parent container of the button (itemDiv) and remove it
+          document.getElementById('employeeContainer').removeChild(employeediv);
+      }
+  });
+  employeediv.appendChild(button);
+
+  return employeediv;
+}
+
 addEmp.addEventListener('click', () => {
-  let fname = document.getElementById("fname");
-  let lname = document.getElementById("lname");
+  var fname = document.getElementById("fname");
+  var lname = document.getElementById("lname");
 
   // sent data to server to update DB 
   alert("This form has been successfully submitted!");
-  var paragraphElement = document.createElement('p');
-  paragraphElement.textContent = fname.value;
+  var paragraphElement = createEmployee(fname.value, lname.value);
+  
   var container = document.getElementById('employeeContainer');
   container.appendChild(paragraphElement);
   fname.value = "";
@@ -214,23 +254,44 @@ cancleEmp.addEventListener("click", (e) => {
 
 var toAccList = document.getElementById('listToAccept');
 
-function createToAcceptDiv(text) {
+function createToAcceptDiv(username, time, date) {
   var toAcceptDiv = document.createElement("div");
   toAcceptDiv.classList.add("to-accept-div");
 
-  var paragraph = document.createElement("p");
-  paragraph.textContent = text;
-  toAcceptDiv.appendChild(paragraph);
+  var words = document.createElement("div");
+  words.classList.add("make-words-row");
 
+
+  //* add userName
+  var paragraph = document.createElement("p");
+  paragraph.textContent = username;
+  words.appendChild(paragraph);
+
+  //* add time
+  var paragraph2 = document.createElement("p");
+  paragraph2.textContent = time;
+  words.appendChild(paragraph2);
+
+  //* add date
+  var paragraph3 = document.createElement("p");
+  paragraph3.textContent = date;
+  words.appendChild(paragraph3);
+
+  toAcceptDiv.appendChild(words);
+
+  var helpdiv = document.createElement("div");
+  helpdiv.classList.add("a-x-buttons");
   var acceptButton = document.createElement("button");
   acceptButton.classList.add("acceptButton");
   acceptButton.textContent = "A";
-  toAcceptDiv.appendChild(acceptButton);
+  helpdiv.appendChild(acceptButton);
 
   var rejectButton = document.createElement("button");
   rejectButton.classList.add("rejectButton");
   rejectButton.textContent = "X";
-  toAcceptDiv.appendChild(rejectButton);
+  helpdiv.appendChild(rejectButton);
+
+  toAcceptDiv.appendChild(helpdiv);
 
   return toAcceptDiv;
 }
@@ -247,7 +308,7 @@ toAccList.addEventListener("click", function(event) {
     // if accept send accepted to db 
     var toAcceptDiv = event.target.closest(".to-accept-div");
     if (toAcceptDiv) {
-      toAcceptDiv.style = "    background-color: black;";
+      toAcceptDiv.style = "    background-color: blue;";
     }
 }
 });
@@ -335,10 +396,39 @@ function loadReservationToAccept() {
     // * when rejected send rejected with i guess id ?
 }
 
+function testloadReservationToAccept() {
+    const urlParams = new URLSearchParams(window.location.search);
+    companyId = urlParams.get('companyId');
+
+    var toAcc = createToAcceptDiv("daniel kowak", "12:30", "01-03-2024");
+    toAccList.appendChild(toAcc);
+    toAcc = createToAcceptDiv("bartek berek", "11:30", "14-06-2024");
+    toAccList.appendChild(toAcc);
+    toAcc = createToAcceptDiv("marcin daniel", "10:00", "22-02-2024");
+    toAccList.appendChild(toAcc);
+    toAcc = createToAcceptDiv("ania anna", "17:45", "26-12-2024");
+    toAccList.appendChild(toAcc);
+    toAcc = createToAcceptDiv("bartek berek", "11:30", "14-06-2024");
+    toAccList.appendChild(toAcc);
+    toAcc = createToAcceptDiv("marcin daniel", "10:00", "22-02-2024");
+    toAccList.appendChild(toAcc);
+    toAcc = createToAcceptDiv("ania anna", "17:45", "26-12-2024");
+    toAccList.appendChild(toAcc);
+}
+
+function testloadEmployeeList() {
+    const urlParams = new URLSearchParams(window.location.search);
+    companyId = urlParams.get('companyId');
+
+
+}
+
 window.onload = function() {
     loadCompanyData();
     loadEmployeeList();
     loadReservationToAccept();
+    testloadReservationToAccept();
+    testloadEmployeeList();
 };
 
 document.getElementById('calendarhref').addEventListener('click', function() {

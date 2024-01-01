@@ -378,4 +378,9 @@ public class BookItController {
         //* Update  db for user events and delete from company to accept table
     }
 
+    
+    //* update reservation status
+    //* update employee list
+    //* update company info
+
 }

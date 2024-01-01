@@ -9,7 +9,7 @@
 </head>
 <body>
     <nav>
-        <a href="#" class="about-us">About Us</a>
+        <a href="#" class="about-us-href">About Us</a>
         <a href="#" class="calendar" id="calendarhref">Calendar</a>
         <a href="/login" onclick="logOut()" class="log-out">Log Out</a>
     </nav>
@@ -40,15 +40,15 @@
                     </section>
                     <section class="section-row" id="sectionRow">
                         <p>City :</p>
-                        <div id="cityDiv"></div><p id="cityEdit" contenteditable="false"></p></div>
+                        <div id="cityDiv"><p id="cityEdit" contenteditable="false"></p></div>
                     </section>
                     <section class="section-row" id="sectionRow">
                         <p>Email :</p>
-                        <div id="emailDiv"></div><p id="emailEdit" contenteditable="false"></p></div>
+                        <div id="emailDiv"><p id="emailEdit" contenteditable="false"></p></div>
                     </section>
                     <section class="section-row" id="sectionRow"> 
                         <p>Telephone :</p>
-                        <div id="phoneDiv"></div><p id="phoneEdit" contenteditable="false"></p></div>
+                        <div id="phoneDiv">><p id="phoneEdit" contenteditable="false"></p></div>
                     </section>
                 </section>
                 <button id="informations-save-button" style="display: none;" onclick="editInformationsSave()">Save</button>
@@ -65,95 +65,38 @@
             </section>
     
         </div>
-        <div class="row-column-emp-list">
-            <div class="list-to-accept" id="listToAccept">
+        <!-- <div class="row-column-emp-list"> -->
+            <div class="divek1">
                 <h2>To accept list</h2>
-                <div class="to-accept-div" >
-                    <p>to accediv t 1</p>
-                    <button class="acceptbutton" id="acceptBtn">A</button>
-                    <button class="rejectButton" id="rejectBtn">X</button>
-                </div >
-                <div class="to-accept-div" >
-                    <p>to accediv t 2</p>
-                    <button class="acceptbutton" id="acceptBtn">A</button>
-                    <button class="rejectButton" id="rejectBtn">X</button>
-                </div >
-                <div class="to-accept-div" >
-                    <p>to accediv t 3</p>
-                    <button class="acceptbutton" id="acceptBtn">A</button>
-                    <button class="rejectButton" id="rejectBtn">X</button>
-                </div >
-                <div class="to-accept-div" >
-                    <p>to accediv t 1</p>
-                    <button class="acceptbutton" id="acceptBtn">A</button>
-                    <button class="rejectButton" id="rejectBtn">X</button>
-                </div >
-                <div class="to-accept-div" >
-                    <p>to accediv t 2</p>
-                    <button class="acceptbutton" id="acceptBtn">A</button>
-                    <button class="rejectButton" id="rejectBtn">X</button>
-                </div >
-                <div class="to-accept-div" >
-                    <p>to accediv t 3</p>
-                    <button class="acceptbutton" id="acceptBtn">A</button>
-                    <button class="rejectButton" id="rejectBtn">X</button>
-                </div >
-                <div class="to-accept-div" >
-                    <p>to accediv t 1</p>
-                    <button class="acceptbutton" id="acceptBtn">A</button>
-                    <button class="rejectButton" id="rejectBtn">X</button>
-                </div >
-                <div class="to-accept-div" >
-                    <p>to accediv t 2</p>
-                    <button class="acceptbutton" id="acceptBtn">A</button>
-                    <button class="rejectButton" id="rejectBtn">X</button>
-                </div >
-                <div class="to-accept-div" >
-                    <p>to accediv t 3</p>
-                    <button class="acceptbutton" id="acceptBtn">A</button>
-                    <button class="rejectButton" id="rejectBtn">X</button>
-                </div >
-                <div class="to-accept-div" >
-                    <p>to accediv t 1</p>
-                    <button class="acceptbutton" id="acceptBtn">A</button>
-                    <button class="rejectButton" id="rejectBtn">X</button>
-                </div >
-                <div class="to-accept-div" >
-                    <p>to accediv t 2</p>
-                    <button class="acceptbutton" id="acceptBtn">A</button>
-                    <button class="rejectButton" id="rejectBtn">X</button>
-                </div >
-                <div class="to-accept-div" >
-                    <p>to accediv t 3</p>
-                    <button class="acceptbutton" id="acceptBtn">A</button>
-                    <button class="rejectButton" id="rejectBtn">X</button>
-                </div >
-            </div>
-            <div class="employee-div">
-                <div class="div2">
-                    <h2>Employee list</h2>
-                    <div class="employee-list-container" id="employeeContainer">
-                        <p>employee 1</p>
-                        <p>employee 2</p>
-                        <p>employee 3</p>
-                    </div>
-                    <button class="add-employee-button" id="addEmployeeButton" onclick="openAddEmployeeForm()">Add employee</button>
+                <div class="list-to-accept" id="listToAccept">
+                    
                 </div>
-                <dialog id="addEmpDialog"> 
-                    <form action="" id="addEmployeeForm">
-                        <p>Add employee</p>
-                        <label for="fname">First name:</label><br>
-                        <input type="text" id="fname" name="fname" value="" required><br>
-                        <label for="lname">Last name:</label><br>
-                        <input type="text" id="lname" name="lname" value="" required><br><br>
-                        <div>
-                            <button id="cancelBtn">Cancel</button>
-                            <button id="confirmBtn">Add</button>
-                        </div>
-                    </form>
-                </dialog>
             </div>
-        </div>
+            <div class="divek2">
+                <div class="employee-div">
+                    <div class="div2">
+                        <h2>Employee list</h2>
+                        <div class="employee-list-container" id="employeeContainer">
+                        </div>
+                        <button class="add-employee-button" id="addEmployeeButton" onclick="">Add employee</button>
+                    </div>
+                    <dialog id="addEmpDialog"> 
+                        <form action="" id="addEmployeeForm">
+                            <p>Add employee</p>
+                            <label for="fname">First name:</label><br>
+                            <input type="text" id="fname" name="fname" value="" required><br>
+                            <label for="lname">Last name:</label><br>
+                            <input type="text" id="lname" name="lname" value="" required><br><br>
+                            <div>
+                                <button id="cancelBtn">Cancel</button>
+                                <button id="confirmBtn">Add</button>
+                            </div>
+                        </form>
+                    </dialog>
+                </div>
+            </div>
+
+        <!-- </div> -->
         
     </main>
 
