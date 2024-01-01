@@ -18,7 +18,7 @@
 
     <div class="register-form" id="userForm">
       <h2>User Register</h2>
-      <form id="userRegisterForm" onsubmit="return userRegister()" method="post">
+      <form action="/userRegister" id="userRegisterForm" th:action="@{/userRegister}" onsubmit="return userRegister()" method="post">
         <div class="names">
             <div class="form-group">
                 <label for="user_fname">First name:</label>
@@ -61,7 +61,7 @@
 
     <div class="register-form" id="companyForm" style="display: none;">
       <h2>Company Register</h2>
-      <form id="companyRegisterForm" onsubmit="return companyRegister()" method="post">
+      <form action="/companyRegister" id="companyRegisterForm" th:action="@{/companyRegister}" onsubmit="return companyRegister()" method="post">
         <div class="form-group">
             <label for="company_name">Name:</label>
             <input type="text" id="company_name" name="company_name" required>
@@ -72,7 +72,7 @@
           <div class="form-group location">
             <div class="x">
                 <label for="company_location_street">Address:</label>
-                <input type="text" id="company_location" name="company_location" required>
+                <input type="text" id="company_location_street" name="company_location_street" required>
             </div>
             <div class="y">
                 <label for="company_location_city">City:</label>

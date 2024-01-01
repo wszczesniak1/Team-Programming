@@ -82,18 +82,18 @@ public class BookItController {
     //* CHANDLE LOGIN */
 
     @PostMapping("/companyRegister")
-    public String compRegister(@RequestParam String name, @RequestParam String street, @RequestParam String city, @RequestParam String phone, @RequestParam String email, @RequestParam String password){
+    public String compRegister(@PathVariable String name, @PathVariable String street, @PathVariable String city, @PathVariable String phone, @PathVariable String email, @PathVariable String password){
 
-
+        System.out.println(name + " " + street + " " + phone);
         //* Add company to Db and redirect to login page, or return 0 if already exists, can be as string like return "0"; 
 
         return "redirect:/login";
     }
 
     @PostMapping("/userRegister")
-    public String userRegister(@RequestParam String fname, @RequestParam String lname, @RequestParam String phone, @RequestParam String email, @RequestParam String password){
+    public String userRegister(@PathVariable String user_fname, @PathVariable String user_lname, @PathVariable String user_email, @PathVariable String user_phone, @PathVariable String user_password, @PathVariable String user_redopassword){
 
-
+        System.out.println(user_fname + " " + user_lname + " " + user_phone);
         //* Add user to Db and redirect to login page, or return 0 if already exists, can be as string like return "0"; 
 
         return "redirect:/login";
@@ -157,10 +157,10 @@ public class BookItController {
         return "redirect:/companyhome?companyId=" + companyId;
     }
 
-    @GetMapping("/redirectUserToCompany/{companyId}")
-    public String redirectUser(@PathVariable int companyId) {
+    @GetMapping("/redirectUserToCompany/{companyId}/{userId}")
+    public String redirectUser(@PathVariable int companyId, @PathVariable int userId) {
         System.out.println("blablabla");
-        return "redirect:/usercalendar?companyId=" + companyId;
+        return "redirect:/usercalendar?companyId=" + companyId + "&userId=" + userId;
     }
 
     @GetMapping("/redirectToCalendar/{companyId}")

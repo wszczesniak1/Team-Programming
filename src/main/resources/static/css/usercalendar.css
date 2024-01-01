@@ -31,6 +31,7 @@ main {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    height: 520px;
 }
 .wrapper header{
     display: flex;
@@ -130,3 +131,74 @@ header .current-date{
     justify-content: center;
     gap: 8px;
 }
+
+.log-out {
+    text-decoration: none;
+    color: white;
+    font-size: large;
+}
+
+.log-out:hover {
+    background-color: #53c957;
+}
+
+.calendarEntries {
+    display: flex;
+    flex-direction: column;
+}
+
+.div-events {
+    background-color: #333;
+    overflow-y: scroll;
+    border-radius: 10px;
+    height: 87%;
+    width: 100%;
+    gap: 8px;
+}
+
+.event-main-div {
+    background-color: #9b9b9b;
+    border-radius: 8px;
+    margin: 8px;
+    padding-bottom: 8px;
+}
+
+.event-div-info {
+    /* background-color: blue; */
+    padding-top: 15px;
+    font-size: medium;
+    padding-left: 8px;
+}
+
+.row-spacebetween {
+    /* background-color: purple; */
+    font-size: medium;
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between; */
+    /* padding-right: 8px; */
+}
+
+.event-main-div p {
+    margin: 4px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-row button {
+    width: 80px;
+    height: 40px;
+    background-color:#439b46;
+    font-size: medium;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    /* padding-bottom: 10px; */
+}
+

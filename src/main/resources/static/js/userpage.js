@@ -64,7 +64,9 @@ function search() {
 
                 resultItem.addEventListener("click", function(){
                     console.log("Company ID:", item.companyID);
-                    window.location.href = `/redirectUserToCompany/${item.companyID}`;
+                    const urlParams = new URLSearchParams(window.location.search);
+                    userId = urlParams.get('userId');
+                    window.location.href = `/redirectUserToCompany/${item.companyID}/${userId}`;
                 })
                 resultsContainer.appendChild(resultItem);
             });
