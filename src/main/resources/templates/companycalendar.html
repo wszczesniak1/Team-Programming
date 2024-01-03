@@ -10,7 +10,7 @@
 <body>
     <nav>
         <a href="#" class="about-us" id="aboutusonclick">About Us</a>
-        <a href="#" class="cal">Calendar</a>
+        <a href="" class="cal">Calendar</a>
         <a href="/login" onclick="logOut()" class="log-out">Log Out</a>
     </nav>
 
@@ -45,30 +45,39 @@
             <p id="nameOfMonth"> </p>
             <p class="year" id="noYear"> </p>
         </div>
-        <div class="list-of-events" id="eventsContainer">
+        <div class="div-events" id="eventContainer">
           
         </div>
+    </section>
+
+    </main>
+    <section class="add-events-button-section">
         <button class="add-event-button" id="addEventBtn">Add Event</button>
         <dialog id="addEventDialog"> 
-          <form action="" id="addEventForm">
-              <p>Add event</p>
-              <label for="title">Title :</label><br>
-              <input type="text" id="title" name="title" value="" required><br>
-              <label for="time1">Beginning :</label><br>
-              <input type="time" id="time1" name="time1" value="" required><br>
-              <label for="duration">End :</label><br>
-              <input type="time" id="duration" name="duration" value="" required><br>
-              <label for="price">Price :</label><br>
-              <input type="number" id="price" name="price" value="" required><br>
-              <label for="employeeList">Employee :</label><br>
-              <input type="text" id="employeeList" name="employeeList" value="" required><br><br>
-              <div>
-                  <button id="cancelBtn">Cancel</button>
-                  <button id="confirmBtn">Add</button>
-              </div>
-          </form>
-      </dialog>
+            <form action="" id="addEventForm">
+                <p>Add event</p>
+                <label for="title">Title :</label><br>
+                <input type="text" id="title" name="title" value="" required><br>
+                <label for="time1">Beginning :</label><br>
+                <input type="time" id="time1" name="time1" value="" required><br>
+                <label for="duration">End :</label><br>
+                <input type="time" id="duration" name="duration" value="" required><br>
+                <label for="price">Price :</label><br>
+                <input type="number" id="price" name="price" value="" required><br>
+                <label for="employeeList">Employee :</label><br>
+                <select type="text" id="employeeList" name="employeeList" value="" required> 
+                    <option value="emp 1">emp 1</option>
+                    <option value="emp 2">emp 2</option>
+                    <option value="emp 3">emp 3</option>
+                    <option value="emp 4">emp 4</option>
+                </select>
+                    <br><br>
+                <div>
+                    <button id="cancelBtn">Cancel</button>
+                    <button id="confirmBtn">Add</button>
+                </div>
+            </form>
+        </dialog>
     </section>
-    </main>
 </body>
 </html>

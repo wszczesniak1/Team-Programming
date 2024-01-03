@@ -1,3 +1,5 @@
+var companyId = 1;
+
 const daysTag = document.querySelector(".days"),
 currentDate = document.querySelector(".current-date"),
 prevNextIcon = document.querySelectorAll(".icons span");
@@ -7,10 +9,7 @@ let date = new Date(),
 currYear = date.getFullYear(),
 currMonth = date.getMonth();
 
-let date1 = new Date(),
-currYear1 = date.getFullYear(),
-currMonth1 = date.getMonth();
-
+// storing full name of all months in array
 const months = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"];
 
@@ -19,10 +18,10 @@ const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frida
 
 const renderCalendar = () => {
 
-    document.getElementById('noDay').textContent = date1.getDate();
-    document.getElementById('nameOfDay').textContent = weekdays[date1.getDay() +1];
-    document.getElementById('nameOfMonth').textContent = months[currMonth1];
-    document.getElementById('noYear').textContent = currYear1;
+    // document.getElementById('noDay').textContent = date.getDate();
+    // document.getElementById('nameOfDay').textContent = weekdays[date.getDay() +1];
+    // document.getElementById('nameOfMonth').textContent = months[currMonth];
+    // document.getElementById('noYear').textContent = currYear;
 
     let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
     lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
@@ -69,6 +68,9 @@ function changeActiveDay(clickedDay) {
     document.getElementById('nameOfDay').textContent = weekdays[weekday];
     document.getElementById('nameOfMonth').textContent = months[selectedMonth];
     document.getElementById('noYear').textContent = currYear;
+
+    document.getElementById("eventContainer").innerHTML = '';
+    showEvents(selectedDay, selectedMonth+1, selectedYear);
   }
   
 
@@ -91,149 +93,358 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
     });
 });
 
-var addEventButton = document.getElementById('addEventBtn');
+
+var bt = document.getElementById('addEventBtn');
 var dialog = document.getElementById('addEventDialog');
 var addEmp = document.getElementById('confirmBtn');
 var cancleEmp = document.getElementById('cancelBtn');
 
-addEventButton.addEventListener('click', () => {
-  dialog.showModal();
-  // add dialog with 
-  // name of event
-  // date, time
-  // select employee from list
-  // price
-  // add button and cancle button 
+bt.addEventListener('click', () => {
+    dialog.showModal();
 })
-var eventsContainer = document.getElementById("eventsContainer");
-
-var companyId = 1;
-
-
 
 addEmp.addEventListener('click', (event) => {
-  // let fname = document.getElementById("fname");
-  // let lname = document.getElementById("lname");
-  event.preventDefault();
-  // sent data to server to update DB 
-  alert("This form has been successfully submitted!");
+    // let fname = document.getElementById("fname");
+    // let lname = document.getElementById("lname");
+    event.preventDefault();
+    // sent data to server to update DB 
+    alert("This form has been successfully submitted!");
+  
+    startTimeValue = document.getElementById("time1").value;
+    endTimeValue = document.getElementById("duration").value;
+  
+    // Create Date objects with a common date (January 1, 1970) and the retrieved time values
+    startDate = new Date(`1970-01-01T${startTimeValue}`);
+    endDate = new Date(`1970-01-01T${endTimeValue}`);
+  
+    // Calculate the time difference in milliseconds
+    timeDifferenceMillis = endDate - startDate;
+  
+    // Convert milliseconds to hours and minutes
+    hours = Math.floor(timeDifferenceMillis / (1000 * 60 * 60));
+    minutes = Math.floor((timeDifferenceMillis % (1000 * 60 * 60)) / (1000 * 60));
+    const urlParams = new URLSearchParams(window.location.search);
+    companyId = urlParams.get('companyId');
+  
+    dataToSend = {
+      title: document.getElementById('title').value,
+      startTime: document.getElementById('time1').value,
+      duration: hours*60 + minutes,
+      price: document.getElementById('price').value,
+      companyId: companyId,
+      // employeeID? employeeName:
+    };
+    
+    console.log(dataToSend);
+  
+    dialog.close();
+  })
+  
+  cancleEmp.addEventListener("click", (e) => {
+    e.preventDefault();
+    dialog.close();
+  });
 
-  startTimeValue = document.getElementById("time1").value;
-  endTimeValue = document.getElementById("duration").value;
+function getCompanyEvents () {
 
-  // Create Date objects with a common date (January 1, 1970) and the retrieved time values
-  startDate = new Date(`1970-01-01T${startTimeValue}`);
-  endDate = new Date(`1970-01-01T${endTimeValue}`);
+    const urlParams = new URLSearchParams(window.location.search);
+    companyId = urlParams.get('companyId');
 
-  // Calculate the time difference in milliseconds
-  timeDifferenceMillis = endDate - startDate;
+    fetch(`/getEventsFromCompanyForUser/${companyId}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(results => {
 
-  // Convert milliseconds to hours and minutes
-  hours = Math.floor(timeDifferenceMillis / (1000 * 60 * 60));
-  minutes = Math.floor((timeDifferenceMillis % (1000 * 60 * 60)) / (1000 * 60));
 
-
-  dataToSend = {
-    title: document.getElementById('title').value,
-    startTime: document.getElementById('time1').value,
-    duration: hours*60 + minutes,
-    price: document.getElementById('price').value
-    // employeeID? employeeName:
-  };
-
-  var eventDiv = document.createElement("div");
-  eventDiv.classList.add("event-container");
-
-  // Create elements for the event details
-  var titleElement = document.createElement("h2");
-  titleElement.textContent = dataToSend.title;
-
-  var startTimeElement = document.createElement("p");
-  startTimeElement.textContent = `Start Time: ${dataToSend.startTime}`;
-
-  var endTimeElement = document.createElement("p");
-  endTimeElement.textContent = `End Time: ${dataToSend.duration}`;
-
-  var priceElement = document.createElement("p");
-  priceElement.textContent = `Price: ${dataToSend.price}`;
-
-  // userNameElement = document.createElement("p");
-  // userNameElement.textContent = `User: ${dataToSend.userName}`;
-
-  // Append elements to the event div
-  eventDiv.appendChild(titleElement);
-  eventDiv.appendChild(startTimeElement);
-  eventDiv.appendChild(endTimeElement);
-  eventDiv.appendChild(priceElement);
-  // eventDiv.appendChild(userNameElement);
-
-  // Append the event div to the container
-  eventsContainer.appendChild(eventDiv);
-  // fetch(`/putEventToDatabase?companyId=${companyID}`, {
-  //   method: "POST",
-  //   headers: {
-  //       "Content-Type": "application/json"
-  //   },
-  //   body: JSON.stringify(dataToSend)
-  // })
-  // .then(response => {
-  //     if (!response.ok) {
-  //         throw new Error(`HTTP error! Status: ${response.status}`);
-  //     }
-  //     return response.text();
-  // })
-  // .then(responseText => {
-  //     console.log(responseText); // Process the response from the server
-  // })
-  // .catch(error => {
-  //     console.error("Fetch error:", error);
-  // });
-
-  // te info tez trzeba wyslac jako date na serwer
-  console.log(document.getElementById('noDay').textContent);
-  console.log(currMonth + 1);
-  console.log(document.getElementById('noYear').textContent);
-  console.log(dataToSend);
-
-  dialog.close();
-})
-
-cancleEmp.addEventListener("click", (e) => {
-  e.preventDefault();
-  dialog.close();
-});
-
-// load all events and add to array
-function loadAllEvents() {
-    fetch(`/getEventsFromCompany/${companyId}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(results => {
-
-            console.log(results);
-
-            // results.forEach(item => {
-            //     // create events list with < details > 
-            //     // and button to book and if book send book request to db
-            // });
-        })
-        .catch(error => {
-            console.error('Search error:', error);
-        });
+        console.log(results);
+        // results.forEach(item => {
+        //     // create events list with < details > 
+        //     // and button to book and if book send book request to db
+        // });
+    })
+    .catch(error => {
+        console.error('Search error:', error);
+    });
 }
 
-// get events on specific day from array
-function getEvent(day, month, year) {
+function getUserInfo() {
+    const urlParams = new URLSearchParams(window.location.search);
+    userId = urlParams.get('userId');
 
+    companyId = urlParams.get('companyId');
+    console.log(companyId);
+    console.log(userId);
+
+    fetch(`/getUserInfo/${userId}`)
+            .then(response => {
+                // Check if the request was successful (status code 200-299)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+    
+                // Parse the response JSON
+                return response.json();
+            })
+            .then(results => {
+                document.getElementById('userEmail').innerText = results.email;
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
 }
 
-document.getElementById('aboutusonclick').addEventListener('click', () => {
+function loadDate(){
+    var currentDate = new Date();
+
+    // Get the day, month, and year
+    var day = currentDate.getDate();
+    var weekday = currentDate.getDay();
+    var month = currentDate.getMonth(); // Months are zero-based, so add 1
+    var year = currentDate.getFullYear();
+    document.getElementById('noDay').textContent = day;
+    document.getElementById('nameOfDay').textContent = weekdays[weekday+1];
+    document.getElementById('nameOfMonth').textContent = months[month];
+    document.getElementById('noYear').textContent = year;
+    showEvents(day, month+1, year);
+}
+
+function findEvents(day, month, year, events) {
+  // Convert day, month, and year to a formatted date string
+  var dateString = `${year}-${month}-${day}`;
+
+  // console.log(dateString);
+
+  // Look up events for the specified date
+  var eventsForDate = [];
+
+  events.forEach(function(event) {
+    if(event.date === dateString) {
+      eventsForDate.push(event);
+      // console.log(event);
+    }
+  })
+
+  return eventsForDate;
+}
+
+function compareTimes(time1, time2) {
+  var [hours1, minutes1] = time1.split(':').map(Number);
+  var [hours2, minutes2] = time2.split(':').map(Number);
+
+  if (hours1 !== hours2) {
+    return hours1 - hours2;
+  } else {
+    return minutes1 - minutes2;
+  }
+}
+
+function showEvents(day, month, year) { 
+
+  //get all events
+  var events = [];
+
+  events.push({
+    date: '2024-1-1', // Get YYYY-MM-DD part of ISO string
+    employee: 'employee1',
+    time: '12:00',
+    address: 'address 1',
+    city: 'Warsaw',
+    name: 'random name 1',
+    price: '1122',
+    eventId: '1',
+  });
+  events.push({
+    date: '2024-1-1', // Get YYYY-MM-DD part of ISO string
+    employee: 'employee1',
+    time: '10:01',
+    address: 'address 1',
+    city: 'Brno',
+    name: 'random name 1',
+    price: '1122',
+    eventId: '2',
+  });
+  events.push({
+    date: '2024-1-1', // Get YYYY-MM-DD part of ISO string
+    employee: 'employee123',
+    time: '14:30',
+    address: 'asdasd 1',
+    city: 'Wroclaw',    
+    name: 'respect idk',
+    price: '73',
+    eventId: '3',
+  });
+  events.push({
+    date: '2024-1-2', // Get YYYY-MM-DD part of ISO string
+    employee: 'employee2',
+    time: '12:00',
+    address: 'address 2',
+    city: 'Warsaw',
+    name: 'random name 2',
+    price: '1111',
+    eventId: '4',
+  });  
+  events.push({
+    date: '2024-1-3', // Get YYYY-MM-DD part of ISO string
+    employee: 'employee3',
+    time: '12:00',
+    address: 'address 3',
+    city: 'Moscow',
+    name: 'random name 3',
+    price: '1133',
+    eventId: '5',
+  });  
+  events.push({
+    date: '2024-1-4', // Get YYYY-MM-DD part of ISO string
+    employee: 'employee4',
+    time: '12:00',
+    address: 'address 4',
+    city: 'Warsaw',
+    name: 'random name 4',
+    price: '21',
+    eventId: '6',
+  });
+
+  var eventsToShow = findEvents(day, month, year, events)
+
+  eventsToShow.sort(function (a, b) {
+    return compareTimes(a.time, b.time);
+  });
+
+  console.log(eventsToShow);
+
+  const container = document.getElementById("eventContainer");
+
+
+  //* ##################################################################################
+  //* ################# GENERATE EVENTS UI #############################################
+  //* ##################################################################################
+
+  eventsToShow.forEach(function(event) {
+    const div = document.createElement('div');
+    div.classList.add('event-main-div');
+
+    var div2 = document.createElement('div');
+    div2.classList.add('event-div-info');
+
+    var p = document.createElement('p');
+    p.textContent = "Name : " + event.name;
+    var p2 = document.createElement('p');
+    p2.textContent = "Time : " + event.time;
+    var p3 = document.createElement('p');
+    p3.textContent = "Price : " + event.price;
+    var p4 = document.createElement('p');
+    p4.textContent = "Address : " + event.address;
+    var p5 = document.createElement('p');
+    p5.textContent = "City : " + event.city;
+    var p6 = document.createElement('p');
+    p6.textContent = "Employee : " + event.employee;
+
+    // time price
+    var div3 = document.createElement('div');
+    div3.classList.add('row-spacebetween');
+    div3.appendChild(p2);
+    div3.appendChild(p3);
+    // address city
+    var div4 = document.createElement('div');
+    div4.classList.add('row-spacebetween');
+    div4.appendChild(p4);
+    div4.appendChild(p5);
+
+    div2.appendChild(p);
+    div2.appendChild(div3);
+    div2.appendChild(div4);
+    div2.appendChild(p6);
+
+    const button = document.createElement("button");
+    button.classList.add('reserve-btn');
+    button.innerHTML = "Delete"; // Set the button text or content
+    button.addEventListener("click", function() {
+        
+        
+
+        var confirmReservation = window.confirm("Are you sure you want to delete this appointment?");
+
+        if (confirmReservation) {
+            // Get the parent container of the button (itemDiv) and remove it
+            // send to db to company to delete it from their calendar in backed
+            container.removeChild(div);
+        }
+    });
+    
+    var div5 = document.createElement('div');
+    div5.classList.add('button-row');
+    div5.appendChild(button);
+    div.appendChild(div2);
+    div.appendChild(div5);
+
+    container.appendChild(div);
+    
+  })
+}
+
+function testgetCompanyEvents () {
+  const urlParams = new URLSearchParams(window.location.search);
+  companyId = urlParams.get('companyId');
+
+  var events = [];
+
+  events.push({
+    date: '2024-1-1', // Get YYYY-MM-DD part of ISO string
+    title: 'title1',
+    time: '12;00',
+    address: 'address 1',
+    city: 'Warsaw',
+    name: 'random name 1',
+  });
+  events.push({
+    date: '2024-1-2', // Get YYYY-MM-DD part of ISO string
+    title: 'title2',
+    time: '12;00',
+    address: 'address 2',
+    city: 'Warsaw',
+    name: 'random name 2',
+  });  
+  events.push({
+    date: '2024-1-3', // Get YYYY-MM-DD part of ISO string
+    title: 'title3',
+    time: '12;00',
+    address: 'address 3',
+    city: 'Warsaw',
+    name: 'random name 3',
+  });  
+  events.push({
+    date: '2024-1-4', // Get YYYY-MM-DD part of ISO string
+    title: 'title4',
+    time: '12;00',
+    address: 'address 4',
+    city: 'Warsaw',
+    name: 'random name 4',
+  });
+
+  var currentDate = new Date();
+  var day = currentDate.getDate();
+  var month = currentDate.getMonth(); // Months are zero-based, so add 1
+  var year = currentDate.getFullYear();
+  var eventsToShow = findEvents(day, month+1, year, events)
+  // eventsToShow.forEach(function(event) {
+      
+  // })
+}
+
+var aboutus = document.getElementById('aboutusonclick');
+
+aboutus.addEventListener('click', function() {
+    console.log("aaa ");
+    const urlParams = new URLSearchParams(window.location.search);
+    companyId = urlParams.get('companyId');
     window.location.href = `/redirectToCompany/${companyId}`;
 })
 
 
-loadAllEvents();
+// getUserInfo();
+loadDate();
+// testgetCompanyEvents();

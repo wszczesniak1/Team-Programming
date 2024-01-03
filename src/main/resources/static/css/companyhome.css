@@ -118,6 +118,7 @@ main button {
     flex-direction: row;
     align-items: center;
     gap: 50px;
+    width: 100%;
 }
 
 .list-to-accept {
@@ -157,10 +158,13 @@ main button {
 }
 
 .employee-list-container {
-    overflow-y:scroll;
+    overflow-y: scroll;
     max-height: 600px;
     width: 100%;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .log-out {
@@ -212,6 +216,7 @@ main button {
     display: flex;
     align-items: center;
     flex-direction: column;
+    width: 100%;
 }
 
 .a-x-buttons {
@@ -232,7 +237,7 @@ main button {
 .row-it {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
 }
 
 .paragraph {
