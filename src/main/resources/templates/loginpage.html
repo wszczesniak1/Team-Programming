@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="../js/login.js" defer></script>
+</head>
+<body>
+
+  <div class="login-container">
+    <h1>Login</h1>
+    <div class="login-option">
+      <button onclick="showUserForm()" id="userbutton">User</button>
+      <button onclick="showCompanyForm()" id="companybutton">Company</button>
+    </div>
+
+    <div class="login-form" id="userForm">
+      <h2>User Login</h2>
+      <form id="userLoginForm" onsubmit="return userLogin()" method="post" >
+        <div class="form-group">
+          <label for="user_email">Email:</label>
+          <input type="text" id="user_email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="user_password">Password:</label>
+          <input type="password" id="user_password" name="password" required>
+        </div>
+        <input type="hidden" id="loginType" name="loginType" value="user">
+        <button type="submit" class="submit-button">Login</button>
+      </form>
+      <div class="no-account">      
+        <h3>You don't have an account?  </h3>
+        <a th:href="@{register}" class="registerref">Sign in.</a>
+    </div>
+
+    </div>
+
+    <div class="login-form" id="companyForm" style="display: none;">
+      <h2>Company Login</h2>
+      <form id="companyLoginForm" onsubmit="return companyLogin()" method="post" >
+        <div class="form-group">
+          <label for="company_email">Email:</label>
+          <input type="text" id="company_email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="company_password">Password:</label>
+          <input type="password" id="company_password" name="password" required>
+        </div>
+        <input type="hidden" id="loginType" name="loginType" value="company">
+        <button type="submit" class="submit-button">Login</button>
+      </form>
+      <div class="no-account">      
+        <h3>You don't have an account?  </h3>
+        <a th:href="@{register}" class="registerref">Sign in.</a>
+    </div>
+    </div>
+    
+  </div>
+
+</body>
+</html>

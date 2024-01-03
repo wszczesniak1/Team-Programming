@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="../css/register.css">
+    <script src="../js/register.js" defer></script>
+</head>
+<body>
+
+  <div class="register-container">
+    <h1>Register</h1>
+    <div class="register-option">
+      <button onclick="showUserForm()" id="userbutton">User</button>
+      <button onclick="showCompanyForm()" id="companybutton">Company</button>
+    </div>
+
+    <div class="register-form" id="userForm">
+      <h2>User Register</h2>
+      <form action="/userRegister" id="userRegisterForm" th:action="@{/userRegister}" onsubmit="return userRegister()" method="post">
+        <div class="names">
+            <div class="form-group">
+                <label for="user_fname">First name:</label>
+                <input type="text" id="user_fname" name="user_fname" required>
+            </div>
+            <div class="form-group">
+                <label for="user_lname">Last name:</label>
+                <input type="text" id="user_lname" name="user_lname" required>
+            </div>
+        </div>
+        <div class="email-phone">
+            <div class="form-group">
+                <label for="user_email">Email:</label>
+                <input type="text" id="user_email" name="user_email" required>
+            </div>
+            <div class="form-group">
+                <label for="user_phone">Phone:</label>
+                <input type="tel" id="user_phone" name="user_phone" required>
+            </div>
+        </div>
+        <div class="passes">
+            <div class="form-group">
+                <label for="user_password">Password:</label>
+                <input type="password" id="user_password" name="user_password" required>
+            </div>
+            <div class="form-group">
+                <label for="user_redopassword">Re-entry password:</label>
+                <input type="password" id="user_redopassword" name="user_redopassword" required>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-button">Register</button>
+      </form>
+      <div class="has-account">      
+        <h3>Masz konto?  </h3>
+        <a th:href="@{login}" class="registerref">Zaloguj się.</a>
+    </div>
+
+    </div>
+
+    <div class="register-form" id="companyForm" style="display: none;">
+      <h2>Company Register</h2>
+      <form action="/companyRegister" id="companyRegisterForm" th:action="@{/companyRegister}" onsubmit="return companyRegister()" method="post">
+        <div class="form-group">
+            <label for="company_name">Name:</label>
+            <input type="text" id="company_name" name="company_name" required>
+          </div>
+          <!-- <div class="form-group">
+
+          </div> -->
+          <div class="form-group location">
+            <div class="x">
+                <label for="company_location_street">Address:</label>
+                <input type="text" id="company_location_street" name="company_location_street" required>
+            </div>
+            <div class="y">
+                <label for="company_location_city">City:</label>
+                <input type="text" id="company_location" name="company_location" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="company_number">Phone number:</label>
+            <input type="tel" id="company_number" name="company_number" required>
+          </div>
+        <div class="form-group">
+          <label for="company_email">Email:</label>
+          <input type="text" id="company_email" name="company_email" required>
+        </div>
+        <div class="form-group passwords">
+            <div class="form-group pp">
+                <label for="company_password">Password:</label>
+                <input type="password" id="company_password" name="company_password" required>
+              </div>
+              <div class="form-group pq">
+                  <label for="company_redopassword">Re-type password:</label>
+                  <input type="password" id="company_redopassword" name="company_redopassword" required>
+                </div>
+        </div>
+        <button type="submit" class="submit-button">Register</button>
+      </form>
+      <div class="has-account" >      
+        <h3>Masz konto?  </h3>
+        <a th:href="@{login}" class="registerref">Zaloguj się.</a>
+    </div>
+    </div>
+    
+  </div>
+
+</body>
+</html>

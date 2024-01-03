@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Home Page</title>
+    <link rel="stylesheet" href="../css/companyhome.css">
+    <script src="../js/companypage.js" defer></script>
+</head>
+<body>
+    <nav>
+        <a href="#" class="about-us-href">About Us</a>
+        <a href="#" class="calendar" id="calendarhref">Calendar</a>
+        <a href="/login" onclick="logOut()" class="log-out">Log Out</a>
+    </nav>
+
+    <main>
+        <div class="div1">
+            <h1>Company name</h1>
+            <section class="about-us">
+                <div class="about-us-div">
+                    <h1 class="about-us-text">About Us</h1>
+                    <img src="../images/8666681_edit_icon.svg" alt="Edit icon" width="24" height="24" class="about-us-image" onclick="editAboutUs()">
+                </div>
+                <div id="about-us-p" class="div-text-p">
+                    <p id="aboutUsEdit" contenteditable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean varius tempus convallis. Etiam vel mollis augue. Donec sed elementum nibh. Morbi tempor, enim vel iaculis ornare, justo est euismod arcu, a consectetur diam neque eget quam. Vestibulum quis ex non eros egestas vestibulum. Fusce ultricies auctor metus vitae ullamcorper. Nam ac tortor eu sapien congue facilisis sit amet ac tortor. Vivamus sagittis eget justo eu lobortis. Etiam lacinia ex nec ante bibendum, at ultrices est imperdiet. Nullam interdum pulvinar odio, vitae porttitor tellus rhoncus vel.</p>
+                </div>
+                <button id="about-us-save-button" style="display: none;" onclick="aboutUsSave()">Save</button>
+            </section>
+            <section class="company-informations">
+                <div class="informations-div">
+                    
+                    <h1 class="informations-text">Informations</h1>
+                    <img src="../images/8666681_edit_icon.svg" alt="Edit icon" width="24" height="24" class="informations-image" onclick="editInformations()">
+                </div>
+                <section>
+                    <section class="section-row" id="sectionRow">
+                        <p>Address :</p>
+                        <div id="addressDiv"><p id="addresEdit" contenteditable="false"></p></div>
+                    </section>
+                    <section class="section-row" id="sectionRow">
+                        <p>City :</p>
+                        <div id="cityDiv"><p id="cityEdit" contenteditable="false"></p></div>
+                    </section>
+                    <section class="section-row" id="sectionRow">
+                        <p>Email :</p>
+                        <div id="emailDiv"><p id="emailEdit" contenteditable="false"></p></div>
+                    </section>
+                    <section class="section-row" id="sectionRow"> 
+                        <p>Telephone :</p>
+                        <div id="phoneDiv">><p id="phoneEdit" contenteditable="false"></p></div>
+                    </section>
+                </section>
+                <button id="informations-save-button" style="display: none;" onclick="editInformationsSave()">Save</button>
+            </section>
+            <section class="tags">
+                <div class="tags-div">
+                    <h1 class="tags-text">Tags</h1>
+                    <img src="../images/8666681_edit_icon.svg" alt="Edit icon" width="24" height="24" class="tags-image" onclick="showEditTags()">
+                </div>
+    
+                <div id="tagContainer"></div>
+                
+                <button id="tags-save-button" style="display: none;" onclick="saveTags()">Save</button>
+            </section>
+    
+        </div>
+        <!-- <div class="row-column-emp-list"> -->
+            <div class="divek1">
+                <h2>To accept list</h2>
+                <div class="list-to-accept" id="listToAccept">
+                    
+                </div>
+            </div>
+            <div class="divek2">
+                <div class="employee-div">
+                    <div class="div2">
+                        <h2>Employee list</h2>
+                        <div class="employee-list-container" id="employeeContainer">
+                        </div>
+                        <button class="add-employee-button" id="addEmployeeButton" onclick="">Add employee</button>
+                    </div>
+                    <dialog id="addEmpDialog"> 
+                        <form action="" id="addEmployeeForm">
+                            <p>Add employee</p>
+                            <label for="fname">First name:</label><br>
+                            <input type="text" id="fname" name="fname" value="" required><br>
+                            <label for="lname">Last name:</label><br>
+                            <input type="text" id="lname" name="lname" value="" required><br><br>
+                            <div>
+                                <button id="cancelBtn">Cancel</button>
+                                <button id="confirmBtn">Add</button>
+                            </div>
+                        </form>
+                    </dialog>
+                </div>
+            </div>
+
+        <!-- </div> -->
+        
+    </main>
+
+</body>
+</html>

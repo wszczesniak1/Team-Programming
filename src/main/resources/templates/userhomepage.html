@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Home Page</title>
+    <link rel="stylesheet" href="../css/userhome.css">
+    <script src="../js/userpage.js" defer></script>
+</head>
+<body>
+    <nav class="blure-it">
+        <h2 id="userEmail"></h2>
+        <a href="/login" onclick="logOut()" class="log-out">Log Out</a>
+    </nav>
+
+
+    <main id="toBlur" class="wrapper">
+        <section class="main-search-section" id="mainSearchSection">
+            <div class="search-row">
+                <div class="search-bar" id="searchBar">
+                    <input type="text" id="searchInput" class="search-input" placeholder="What are you looking for...">
+                </div>
+                <button class="cancel-search" id="cancleSearch" onclick="cancleSearch()" style="display: none;">X</button>
+            </div>
+            <div class="city-tags-search" id="cityTagsSearch" style="visibility: hidden;">
+                <div class="dropdown">
+                    <!-- Button that triggers the dropdown -->
+                    <button class="dropdown-button" id="dropdownButton">Choose city</button>
+                
+                    <!-- Dropdown content -->
+                    <div class="dropdown-content">
+                        <!-- Links or items in the dropdown -->
+                        <a href="#" onclick="changeButtonText(this)">Warsaw</a>
+                        <a href="#" onclick="changeButtonText(this)">New York</a>
+                        <a href="#" onclick="changeButtonText(this)">Chicago</a>
+                    </div>
+                </div>
+                <button class="search-button" id="searchButton" onclick="search()">Search</button>
+            </div>
+
+            <div class="search-result-container" id="searchResultContainer" style="visibility: hidden;">
+
+            </div>
+        </section>
+        <section class="future-appointments blure-it" id="futureAppointments">
+            <h2>Your future appointments :</h2>
+            <div class="appointments-container" id="appointmentsContainer">
+            </div>
+        </section>
+    </main>
+</body>
+</html>

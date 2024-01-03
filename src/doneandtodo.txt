@@ -1,0 +1,44 @@
+TODO:
+
+
+USER:
+- add possibility for user to resign from reservation
+- redirect to user-company view and make reservation
+
+- handle registration user
+
+COMPANY:
+- accept / reject reservation request from user on company site
+- employee list
+- add / delete from calendar
+- edit from calendar or just add / delete
+
+- handle registration company
+
+
+USER-COMPANY:
+- view of company page for user where he can search for reservations
+
+
+ALL:
+- make it pretty
+- make it responsive for :
+  - desktop
+  - tablet
+  - phone
+
+
+IN PROGRESS:
+- create calendar view
+- serach view
+- send data from backend to frontend
+
+
+
+DONE: 
+- editable "about us" section
+- editable "inforations"
+- editable "tags"
+
+
+

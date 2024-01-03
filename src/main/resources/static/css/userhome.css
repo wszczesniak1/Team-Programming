@@ -1,0 +1,245 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #c3c3c3;
+    overflow: hidden;
+}
+
+nav {
+    background-color: #439b46;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 50px 0px 50px;
+    gap: 50px;
+    overflow: hidden;
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+.main-search-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(0);
+    transition: transform 0.5s ease-in-out;
+    flex: 2;
+}
+
+.future-appointments {
+    display: flex;
+    min-height: 75%;
+    max-height: 75%;
+    flex-direction: column;
+    align-items: center;
+    background-color: #a2a2a2;
+    flex: 1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#appointmentsContainer {
+    /* max-height: 200px; */
+    height: 70%;
+    padding: 10px;
+    overflow-y:scroll;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    /* min-height: 50px; Set a minimum height */
+}
+
+.search-row {
+    padding-top: 40vh;
+    width: 70vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-input {
+    width: 50vw;
+    font-size:medium;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.city-tags-search {
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.wrapper {
+    position: relative;
+    overflow: hidden;
+    filter: blur(0);
+    transition: filter 0.5s ease-in-out;
+}
+
+.search-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.blur {
+    filter: blur(5px);
+}
+
+.blur2 {
+    filter: blur(0);
+}
+
+@keyframes shiftAnimation {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-300px);
+    }
+}
+
+.shifted {
+    animation: shiftAnimation 1s ease-in-out; 
+    transform: translateY(-300px);
+}
+
+button {
+    cursor: pointer;
+}
+
+#searchResultContainer {
+    /* max-height: 200px; */
+    height: 70vh;
+    padding: 10px;
+    overflow-y:scroll;
+    width: 53vw;
+    display: flex;
+    flex-direction: column;
+    overflow-x:hidden;
+    /* min-height: 50px; Set a minimum height */
+}
+
+.result-item {
+    margin-bottom: 10px;
+    /* margin-left: 40px; */
+    padding: 15px;
+    background-color: bisque;
+    width: 96%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.appointment-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    padding: 5px;
+    background-color: rgb(147, 107, 59);
+    width: 100%;
+    border-radius: 10px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Style the button that triggers the dropdown */
+.dropdown button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Style the dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Style the links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-button {
+    width: 140px;
+    height: auto;
+    margin-top: 5px;
+    margin-right: 50px;
+}
+
+.search-button {
+    font-size: 16px;
+    padding: 10px;
+    width: 140px;
+    height: auto;
+    margin-top: 5px;
+    color: white;
+    margin-right: 25px;
+    background-color: #4CAF50;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.cancel-search {
+    color: white;
+    width: 35px;
+    height: 35px;
+    background-color: #4CAF50;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.cancle-app-btn {
+    background-color :#439b46;
+    font-size: medium;
+    border-radius: 8px;
+    width: 100px;
+}
+
+.log-out {
+    text-decoration: none;
+    color: white;
+    font-size: small;
+}
+
+.log-out:hover {
+    font-size: large;
+}
