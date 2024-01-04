@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: bookit
+-- Host: localhost    Database: bookit
 -- ------------------------------------------------------
 -- Server version	8.0.35
 
@@ -89,6 +89,7 @@ DROP TABLE IF EXISTS `company`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `company` (
   `companyID` int NOT NULL AUTO_INCREMENT,
+  `companyName` varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
   `companyMail` varchar(255) NOT NULL,
   `companyDescription` text,
@@ -468,12 +469,12 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `userID` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `email_address` varchar(255) NOT NULL,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `emailAddress` varchar(255) NOT NULL,
   `phoneNumber` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`userID`),
-  UNIQUE KEY `email_address` (`email_address`)
+  UNIQUE KEY `emailAddress` (`emailAddress`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -614,7 +615,7 @@ BEGIN
  	INSERT INTO company (location, companyMail, companyDescription, phoneNumber)
     	VALUES (p_location, p_companyMail, p_companyDescription, p_phoneNumber);
 
-    	INSERT INTO companyPassword (companyID, passwordHash)
+    	INSERT INTO companypassword (companyID, passwordHash)
     	VALUES (LAST_INSERT_ID(), p_passwordHash);
         COMMIT WORK;
 END ;;
@@ -822,4 +823,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-03 21:35:25
+-- Dump completed on 2024-01-04  2:23:47
