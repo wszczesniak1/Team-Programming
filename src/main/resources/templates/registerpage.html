@@ -18,7 +18,7 @@
 
     <div class="register-form" id="userForm">
       <h2>User Register</h2>
-      <form action="/userRegister" id="userRegisterForm" th:action="@{/userRegister}" onsubmit="return userRegister()" method="post">
+      <form action="/userRegister" id="userRegisterForm"  onsubmit="" method="get">
         <div class="names">
             <div class="form-group">
                 <label for="user_fname">First name:</label>
@@ -50,18 +50,18 @@
             </div>
         </div>
 
-        <button type="submit" class="submit-button">Register</button>
+        <button type="submit" class="submit-button" onclick="userRegister()">Register</button>
       </form>
       <div class="has-account">      
-        <h3>Masz konto?  </h3>
-        <a th:href="@{login}" class="registerref">Zaloguj się.</a>
+        <h3>Already have an account?  </h3>
+        <a th:href="@{login}" class="registerref">Log in.</a>
     </div>
 
     </div>
 
     <div class="register-form" id="companyForm" style="display: none;">
       <h2>Company Register</h2>
-      <form action="/companyRegister" id="companyRegisterForm" th:action="@{/companyRegister}" onsubmit="return companyRegister()" method="post">
+      <form action="/companyRegister" id="companyRegisterForm" onsubmit="" method="get">
         <div class="form-group">
             <label for="company_name">Name:</label>
             <input type="text" id="company_name" name="company_name" required>

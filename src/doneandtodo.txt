@@ -2,25 +2,15 @@ TODO:
 
 
 USER:
-- add possibility for user to resign from reservation
-- redirect to user-company view and make reservation
-
-- handle registration user
 
 COMPANY:
-- accept / reject reservation request from user on company site
-- employee list
-- add / delete from calendar
-- edit from calendar or just add / delete
-
-- handle registration company
-
 
 USER-COMPANY:
-- view of company page for user where he can search for reservations
+
 
 
 ALL:
+- change ui colors 
 - make it pretty
 - make it responsive for :
   - desktop
@@ -29,9 +19,6 @@ ALL:
 
 
 IN PROGRESS:
-- create calendar view
-- serach view
-- send data from backend to frontend
 
 
 
@@ -40,5 +27,15 @@ DONE:
 - editable "inforations"
 - editable "tags"
 
+- add possibility for user to resign from reservation
+- redirect to user-company view and make reservation
 
+- view of company page for user where he can search for reservations
 
+- create calendar view
+- serach view
+- send data from backend to frontend
+- accept / reject reservation request from user on company site
+- employee list
+- add / delete from calendar
+- edit from calendar or just add / delete

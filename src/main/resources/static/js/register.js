@@ -13,14 +13,37 @@ document.getElementById('companybutton').style.backgroundColor = '#4caf50';
 }
 
 function userRegister() {
-// Handle user Register logic here (e.g., validate form inputs)
-alert('User Register logic goes here');
-return true;
+
+  // var user_fname = document.getElementById('user_fname').value;
+  // var user_lname = document.getElementById('user_lname').value;
+  // var user_email = document.getElementById('user_email').value;
+  // var user_phone = document.getElementById('user_phone').value;
+  // var user_password = document.getElementById('user_password').value;
+  // alert(`register user ${user_fname}`);
+  // console.log(user_fname);
+  // fetch(`/userRegister/${user_fname}/${user_lname}/${user_email}/${user_phone}/${user_password}`)
+  // .then(response => {
+  //     if (!response.ok) {
+  //         throw new Error(`HTTP error! Status: ${response.status}`);
+  //     }
+  //     return response.json();
+  // })
+  // .then(results => {
+  //   console.log(results)
+  //   if(results === "1"){
+  //     window.location.href = `/login`;
+  //   } else {
+  //     console.log("wrong user register something")
+  //   }
+  // })
+  // .catch(error => {
+  //     console.error('Search error:', error);
+  // });
 }
 
 function companyRegister() {
 // Handle company Register logic here (e.g., validate form inputs)
-alert('Company Register logic goes here');
+// alert('Company Register logic goes here');
 return true;
 }
 
@@ -53,4 +76,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-    
+  
+
+

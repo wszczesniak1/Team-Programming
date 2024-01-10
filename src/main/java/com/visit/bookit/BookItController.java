@@ -81,19 +81,50 @@ public class BookItController {
 
     //* CHANDLE LOGIN */
 
-    @PostMapping("/companyRegister")
+    @GetMapping("/companyRegister/{name}/{street}/{city}/{phone}/{email}/{password}")
     public String compRegister(@PathVariable String name, @PathVariable String street, @PathVariable String city, @PathVariable String phone, @PathVariable String email, @PathVariable String password){
 
         System.out.println(name + " " + street + " " + phone);
         //* Add company to Db and redirect to login page, or return 0 if already exists, can be as string like return "0"; 
 
+        return "1";
+    }
+
+    // @GetMapping("/userRegister/{user_fname}/{user_lname}/{user_email}/{user_phone}/{user_password}")
+    // public String userRegister(@PathVariable String user_fname, @PathVariable String user_lname, @PathVariable String user_email, @PathVariable String user_phone, @PathVariable String user_password, @PathVariable String user_redopassword){
+
+    //     System.out.println(user_fname + " " + user_lname + " " + user_phone);
+    //     //* Add user to Db and redirect to login page, or return 0 if already exists, can be as string like return "0"; 
+
+    //     return "1";
+    // }
+
+    @GetMapping("/userRegister")
+    public String userRegister(
+        @RequestParam String user_fname, 
+        @RequestParam String user_lname,
+        @RequestParam String user_email, 
+        @RequestParam String user_phone, 
+        @RequestParam String user_password, 
+        @RequestParam String user_redopassword){
+
+        System.out.println(user_fname + " " + user_lname + " " + user_phone);
+        //* Add user to Db and redirect to login page, or return 0 if already exists, can be as string like return "0"; 
+
         return "redirect:/login";
     }
 
-    @PostMapping("/userRegister")
-    public String userRegister(@PathVariable String user_fname, @PathVariable String user_lname, @PathVariable String user_email, @PathVariable String user_phone, @PathVariable String user_password, @PathVariable String user_redopassword){
+    @GetMapping("/companyRegister")
+    public String companyRegister( 
+        @RequestParam String company_name, 
+        @RequestParam String company_location_street,
+        @RequestParam String company_location,
+        @RequestParam String company_number,
+        @RequestParam String company_email,
+        @RequestParam String company_password,
+        @RequestParam String company_redopassword){
 
-        System.out.println(user_fname + " " + user_lname + " " + user_phone);
+        System.out.println(company_name + " " + company_location + " " + company_email);
         //* Add user to Db and redirect to login page, or return 0 if already exists, can be as string like return "0"; 
 
         return "redirect:/login";
@@ -148,9 +179,11 @@ public class BookItController {
     }
 
     @GetMapping("/register")
-    public String registerpage() {
+    public String registerpage(){
+
         return "registerpage";
     }
+
 
     @GetMapping("/redirectToCompany/{companyId}")
     public String redirectToComapny(@PathVariable int companyId) {
