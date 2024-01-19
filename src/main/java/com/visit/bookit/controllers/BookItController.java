@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * First class to test basic controllers
+ */
 @RestController
 public class BookItController {
 

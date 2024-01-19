@@ -19,11 +19,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * Class with main controllers.
+ */
 @Controller
 public class BookItController {
 
-    //* CHANDLE LOGIN */
-
+    /**
+     *  HANDLE LOGIN
+     */
     @PostMapping("/companyRegister")
     public String compRegister(@PathVariable String name, @PathVariable String street, @PathVariable String city, @PathVariable String phone, @PathVariable String email, @PathVariable String password){
 
@@ -83,8 +87,9 @@ public class BookItController {
     //* REGISTER handling will be added later */
 
 
-    //* endpoints that dont need changes */
-
+    /**
+     *  HANDLE LOGIN and REGISTER
+     */
     @GetMapping("/login")
     public String loginpage() {
         return "loginpage";
@@ -131,17 +136,20 @@ public class BookItController {
         return "companycalendar";
     }
 
-    //* END OF endpoints that dont need changes */
     
 
-    //* Function to validate user, add logic */
+    /**
+     *  Function to validate user, add logic
+     */
 
     private boolean isValidUser(String email, String password) {
         //some logic goes here 
         return true;  
     }
 
-    //* Function to validate company,  add logic*/
+    /**
+     * Function to validate company,  add logic
+     */
 
     private boolean isValidCompany(String email, String password) {
     //some logic goes here 
@@ -157,7 +165,7 @@ public class BookItController {
         return ResponseEntity.ok(userMap);
     }
 
-    //* Function to get users appointment 
+    /** Function to get users appointment
     //* INPUT: userId 
     //* OUTPUT: List < Object > 
     /* Where Object {
@@ -168,7 +176,7 @@ public class BookItController {
         Enum status; // can be just string with "pending", "accepted", "rejected"
         Int appointmentId;
         } */
-    //* Variables need to have @JsonProperty("name") with exact "name" as listed in Object() for JSON corectness?? huh this word
+    //* Variables need to have @JsonProperty("name") with exact "name" as listed in Object() for JSON correctness??
 
     @Autowired
     UserAppointmentsRepository userAppointmentsRepository;
@@ -184,7 +192,7 @@ public class BookItController {
         return (ResponseEntity<List<UserAppointments>>) userAppointmentsRepository.getAll();
     }
 
-    //* Function to get companies user search for
+    /** Function to get companies user search for
     //* INPUT: string, as what user typed in search bar 
     //* OUTPUT: List < Object > 
     /* Where Object {
@@ -212,7 +220,7 @@ public class BookItController {
         return (ResponseEntity<List<CompanyForUser>>) companyForUserRepository.getAll();
     }
 
-    //* Function to get company data from db for main page
+    /** Function to get company data from db for main page
     //* INPUT: companyId
     //* OUTPUT: < HashMap > or < Object >
     /* Where Object {
@@ -243,19 +251,19 @@ public class BookItController {
     }
 
     // companyEvents
+    /** return list of objects companyEvents where is :
+     // title
+     // time that event starts
+     // duration of event
+     // date of event
+     // price
+     // employee name
+     */
     @Autowired
     CompanyEventsRepository companyEventsRepository;
     @GetMapping("/getEventsFromCompany/{companyId}")
     public ResponseEntity<List<Integer>> getCompanyEvents(@PathVariable int companyId) {
-        
 
-        //* return list of objects companyEvents where is :
-            // title
-            // time that event starts
-            // duration of event
-            // date of event
-            // price
-            // employee name
 //        List<Integer> arrayList = new ArrayList<>();
 //        arrayList.add(3);
 //        arrayList.add(3);
@@ -274,18 +282,19 @@ public class BookItController {
     }
 
     // companyEvents
+
+    /** return list of objects companyEvents where is :
+     //! Return only events that are for reservation not that are already reserved cuz they are for user view
+     // title
+     // time that event starts
+     // duration of event
+     // date of event
+     // price
+     // employee name
+     */
     @GetMapping("/getEventsFromCompanyForUser/{companyId}")
     public ResponseEntity<List<Integer>> getCompanyEventsForUser(@PathVariable int companyId) {
-        
 
-        //* return list of objects companyEvents where is :
-        //! Return only events that are for reservation not that are already reserved cuz they are for user view
-            // title
-            // time that event starts
-            // duration of event
-            // date of event
-            // price
-            // employee name
         List<Integer> arrayList = new ArrayList<>();
         arrayList.add(2);
         arrayList.add(2);
